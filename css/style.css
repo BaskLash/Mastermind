@@ -4,30 +4,30 @@ body {
 }
 body .main {
   width: 100%;
-  display: flex;
+  display: block;
 }
-body .main .playground {
-  width: 75%;
-  background-color: bisque;
-}
-body .main .playground h1 {
+body .main h1 {
   text-align: center;
 }
-body .main .playground .mastermind-area {
+body .main i {
+  cursor: pointer;
+}
+body .main .mastermind-area {
   /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
   width: 40%;
   margin: auto;
+  display: block;
   border: 2px solid black;
   border-radius: 50px;
   text-align: center;
 }
-body .main .playground .mastermind-area hr.solid {
+body .main .mastermind-area hr.solid {
   border-top: 3px solid black;
 }
-body .main .playground .mastermind-area .mastermind-color-code-result {
+body .main .mastermind-area .mastermind-color-code-result {
   margin: 2rem;
 }
-body .main .playground .mastermind-area .mastermind-color-code-result .circles {
+body .main .mastermind-area .mastermind-color-code-result .circles {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -36,10 +36,10 @@ body .main .playground .mastermind-area .mastermind-color-code-result .circles {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .mastermind-area .mastermind-guesses {
+body .main .mastermind-area .mastermind-guesses {
   margin: 2rem;
 }
-body .main .playground .mastermind-area .mastermind-guesses .circles {
+body .main .mastermind-area .mastermind-guesses .circles {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -48,12 +48,12 @@ body .main .playground .mastermind-area .mastermind-guesses .circles {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .circle-options {
-  margin-left: 18rem;
+body .main .circle-options {
+  margin-left: 40rem;
   display: flex;
   margin-top: 2rem;
 }
-body .main .playground .circle-options .circles:nth-child(1) {
+body .main .circle-options .circles:nth-child(1) {
   height: 50px;
   width: 50px;
   background-color: pink;
@@ -62,7 +62,7 @@ body .main .playground .circle-options .circles:nth-child(1) {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .circle-options .circles:nth-child(2) {
+body .main .circle-options .circles:nth-child(2) {
   height: 50px;
   width: 50px;
   background-color: red;
@@ -71,7 +71,7 @@ body .main .playground .circle-options .circles:nth-child(2) {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .circle-options .circles:nth-child(3) {
+body .main .circle-options .circles:nth-child(3) {
   height: 50px;
   width: 50px;
   background-color: lightblue;
@@ -80,7 +80,7 @@ body .main .playground .circle-options .circles:nth-child(3) {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .circle-options .circles:nth-child(4) {
+body .main .circle-options .circles:nth-child(4) {
   height: 50px;
   width: 50px;
   background-color: blue;
@@ -89,7 +89,7 @@ body .main .playground .circle-options .circles:nth-child(4) {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .circle-options .circles:nth-child(5) {
+body .main .circle-options .circles:nth-child(5) {
   height: 50px;
   width: 50px;
   background-color: yellow;
@@ -98,7 +98,7 @@ body .main .playground .circle-options .circles:nth-child(5) {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .playground .circle-options .circles:nth-child(6) {
+body .main .circle-options .circles:nth-child(6) {
   height: 50px;
   width: 50px;
   background-color: orange;
@@ -107,7 +107,7 @@ body .main .playground .circle-options .circles:nth-child(6) {
   display: inline-block;
   margin-right: 0.1rem;
 }
-body .main .playground .circle-options button {
+body .main .circle-options button {
   background-color: white;
   border: 1px solid black;
   margin-left: 2rem;
@@ -121,20 +121,92 @@ body .main .playground .circle-options button {
   transition-duration: 0.4s;
   cursor: pointer;
 }
-body .main .playground .circle-options button:hover {
+body .main .circle-options button:hover {
   background-color: black;
   color: white;
 }
-body .main .playground .circle-options button i {
+body .main .circle-options button i {
   font-size: 22px;
+  cursor: pointer;
 }
-body .main .information {
-  width: 25%;
-  background-color: aqua;
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
-body .main .information h1 {
-  margin: 2rem;
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
-body .main .information p {
-  margin: 2rem;
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: royalblue;
+  color: white;
 }/*# sourceMappingURL=style.css.map */
