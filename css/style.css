@@ -1,0 +1,140 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+body .main {
+  width: 100%;
+  display: flex;
+}
+body .main .playground {
+  width: 75%;
+  background-color: bisque;
+}
+body .main .playground h1 {
+  text-align: center;
+}
+body .main .playground .mastermind-area {
+  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
+  width: 40%;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 50px;
+  text-align: center;
+}
+body .main .playground .mastermind-area hr.solid {
+  border-top: 3px solid black;
+}
+body .main .playground .mastermind-area .mastermind-color-code-result {
+  margin: 2rem;
+}
+body .main .playground .mastermind-area .mastermind-color-code-result .circles {
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .mastermind-area .mastermind-guesses {
+  margin: 2rem;
+}
+body .main .playground .mastermind-area .mastermind-guesses .circles {
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .circle-options {
+  margin-left: 18rem;
+  display: flex;
+  margin-top: 2rem;
+}
+body .main .playground .circle-options .circles:nth-child(1) {
+  height: 50px;
+  width: 50px;
+  background-color: pink;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .circle-options .circles:nth-child(2) {
+  height: 50px;
+  width: 50px;
+  background-color: red;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .circle-options .circles:nth-child(3) {
+  height: 50px;
+  width: 50px;
+  background-color: lightblue;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .circle-options .circles:nth-child(4) {
+  height: 50px;
+  width: 50px;
+  background-color: blue;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .circle-options .circles:nth-child(5) {
+  height: 50px;
+  width: 50px;
+  background-color: yellow;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 2rem;
+}
+body .main .playground .circle-options .circles:nth-child(6) {
+  height: 50px;
+  width: 50px;
+  background-color: orange;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: inline-block;
+  margin-right: 0.1rem;
+}
+body .main .playground .circle-options button {
+  background-color: white;
+  border: 1px solid black;
+  margin-left: 2rem;
+  border-radius: 10px;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+body .main .playground .circle-options button:hover {
+  background-color: black;
+  color: white;
+}
+body .main .playground .circle-options button i {
+  font-size: 22px;
+}
+body .main .information {
+  width: 25%;
+  background-color: aqua;
+}
+body .main .information h1 {
+  margin: 2rem;
+}
+body .main .information p {
+  margin: 2rem;
+}/*# sourceMappingURL=style.css.map */
