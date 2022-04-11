@@ -2,128 +2,165 @@ body {
     padding: 0;
     margin: 0;
     .main {
-        width: 100%;
-        display: block;
-        h1 {
-            text-align: center;
-        }
-        i {
-            cursor: pointer;
-        }
-        .mastermind-area {
-            /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
-            width: 40%;
-            margin: auto;
+        width: 80%;
+        display: flex;
+        .mastermindField {
+            margin-left: 35rem;
             display: block;
-            border: 2px solid black;
-            border-radius: 50px;
-            text-align: center;
-            hr.solid {
-                border-top: 3px solid black;
+            width: 60%;
+            h1 {
+                text-align: center;
             }
-            .mastermind-color-code-result {
-                margin: 2rem;
-                .circles {
-                    height: 50px;
-                    width: 50px;
-                    background-color: white;
-                    border-radius: 50%;
-                    border: 2px solid black;
-                    display: inline-block;
-                    margin-right: 2rem;
+            i {
+                cursor: pointer;
+            }
+            .mastermind-area {
+                /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
+                margin: auto;
+                display: block;
+                border: 2px solid black;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                border-radius: 50px;
+                text-align: center;
+                hr.solid {
+                    border-top: 3px solid black;
+                }
+                .mastermind-color-code-result {
+                    margin: 2rem;
+                    .circles {
+                        height: 50px;
+                        width: 50px;
+                        background-color: white;
+                        border-radius: 50%;
+                        border: 2px solid black;
+                        display: inline-block;
+                        margin-right: 2rem;
+                    }
+                }
+                .mastermind-guesses {
+                    margin: 2rem;
+                    .circles {
+                        height: 50px;
+                        width: 50px;
+                        background-color: white;
+                        border-radius: 50%;
+                        border: 2px solid black;
+                        display: inline-block;
+                        margin-right: 2rem;
+                    }
                 }
             }
-            .mastermind-guesses {
-                margin: 2rem;
-                .circles {
+            .circle-options {
+                margin-left: 5rem;
+                display: flex;
+                margin-top: 2rem;
+                .circles:nth-child(1) {
                     height: 50px;
                     width: 50px;
-                    background-color: white;
+                    background-color: pink;
                     border-radius: 50%;
                     border: 2px solid black;
                     display: inline-block;
                     margin-right: 2rem;
+                    cursor: pointer;
+                }
+                .circles:nth-child(2) {
+                    height: 50px;
+                    width: 50px;
+                    background-color: red;
+                    border-radius: 50%;
+                    border: 2px solid black;
+                    display: inline-block;
+                    margin-right: 2rem;
+                    cursor: pointer;
+                }
+                .circles:nth-child(3) {
+                    height: 50px;
+                    width: 50px;
+                    background-color: lightblue;
+                    border-radius: 50%;
+                    border: 2px solid black;
+                    display: inline-block;
+                    margin-right: 2rem;
+                    cursor: pointer;
+                }
+                .circles:nth-child(4) {
+                    height: 50px;
+                    width: 50px;
+                    background-color: blue;
+                    border-radius: 50%;
+                    border: 2px solid black;
+                    display: inline-block;
+                    margin-right: 2rem;
+                    cursor: pointer;
+                }
+                .circles:nth-child(5) {
+                    height: 50px;
+                    width: 50px;
+                    background-color: yellow;
+                    border-radius: 50%;
+                    border: 2px solid black;
+                    display: inline-block;
+                    margin-right: 2rem;
+                    cursor: pointer;
+                }
+                .circles:nth-child(6) {
+                    height: 50px;
+                    width: 50px;
+                    background-color: orange;
+                    border-radius: 50%;
+                    border: 2px solid black;
+                    display: inline-block;
+                    margin-right: 0.1rem;
+                    cursor: pointer;
+                }
+                button {
+                    background-color: white;
+                    border: 1px solid black;
+                    margin-left: 2rem;
+                    border-radius: 10px;
+                    color: black;
+                    padding: 16px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    margin-bottom: 1rem;
+                    transition-duration: 0.4s;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: black;
+                        color: white;
+                    }
+                    i {
+                        font-size: 22px;
+                        cursor: pointer;
+                    }
                 }
             }
         }
-        .circle-options {
-            margin-left: 40rem;
-            display: flex;
-            margin-top: 2rem;
-            .circles:nth-child(1) {
+        .rating {
+            margin-top: 16rem;
+            display: block;
+            width: 20%;
+            .rate {
                 height: 50px;
                 width: 50px;
-                background-color: pink;
-                border-radius: 50%;
-                border: 2px solid black;
-                display: inline-block;
-                margin-right: 2rem;
-            }
-            .circles:nth-child(2) {
-                height: 50px;
-                width: 50px;
-                background-color: red;
-                border-radius: 50%;
-                border: 2px solid black;
-                display: inline-block;
-                margin-right: 2rem;
-            }
-            .circles:nth-child(3) {
-                height: 50px;
-                width: 50px;
-                background-color: lightblue;
-                border-radius: 50%;
-                border: 2px solid black;
-                display: inline-block;
-                margin-right: 2rem;
-            }
-            .circles:nth-child(4) {
-                height: 50px;
-                width: 50px;
-                background-color: blue;
-                border-radius: 50%;
-                border: 2px solid black;
-                display: inline-block;
-                margin-right: 2rem;
-            }
-            .circles:nth-child(5) {
-                height: 50px;
-                width: 50px;
-                background-color: yellow;
-                border-radius: 50%;
-                border: 2px solid black;
-                display: inline-block;
-                margin-right: 2rem;
-            }
-            .circles:nth-child(6) {
-                height: 50px;
-                width: 50px;
-                background-color: orange;
-                border-radius: 50%;
-                border: 2px solid black;
-                display: inline-block;
-                margin-right: 0.1rem;
-            }
-            button {
                 background-color: white;
-                border: 1px solid black;
-                margin-left: 2rem;
-                border-radius: 10px;
-                color: black;
-                padding: 16px 32px;
-                text-align: center;
-                text-decoration: none;
-                font-size: 16px;
-                margin-bottom: 1rem;
-                transition-duration: 0.4s;
-                cursor: pointer;
-                &:hover {
-                    background-color: black;
-                    color: white;
-                }
-                i {
-                    font-size: 22px;
-                    cursor: pointer;
+                border-radius: 20%;
+                border: 2px solid black;
+                margin-right: 2rem;
+                margin-bottom: 1.4rem;
+                display: flex;
+                flex-wrap: wrap;
+                .circle {
+                    margin-left: 0.1rem;
+                    margin-top: 0.1rem;
+                    height: 18px;
+                    width: 18px;
+                    background-color: white;
+                    border-radius: 50%;
+                    border: 2px solid black;
                 }
             }
         }

@@ -12,72 +12,119 @@
 
 <body>
     <div class="main">
-        <h1>Mastermind <i class="fa fa-info-circle" id="myBtn"></i></h1>
-        <div class="mastermind-area">
-            <div class="mastermind-color-code-result">
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
+        <!-- Mastermind Field -->
+        <div class="mastermindField">
+            <h1>Mastermind <i class="fa fa-info-circle" id="myBtn"></i></h1>
+            <div class="mastermind-area">
+                <div class="mastermind-color-code-result">
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                </div>
+                <hr class="solid">
+                <div class="mastermind-guesses">
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                    <br>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <div class="circles"></div>
+                    <br>
+                </div>
             </div>
-            <hr class="solid">
-            <div class="mastermind-guesses">
-                <br>
+            <!-- Color options for the user -->
+            <div class="circle-options">
                 <div class="circles"></div>
                 <div class="circles"></div>
                 <div class="circles"></div>
                 <div class="circles"></div>
-                <br>
-                <br>
                 <div class="circles"></div>
                 <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <br>
-                <br>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <br>
-                <br>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <br>
-                <br>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <br>
-                <br>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <br>
-                <br>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <div class="circles"></div>
-                <br>
+                <button><i class="fa fa-angle-left"></i> Delete</button>
             </div>
         </div>
-        <div class="circle-options">
-            <div class="circles"></div>
-            <div class="circles"></div>
-            <div class="circles"></div>
-            <div class="circles"></div>
-            <div class="circles"></div>
-            <div class="circles"></div>
-            <button><i class="fa fa-angle-left"></i> Delete</button>
+        <div class="rating">
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="rate">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
         </div>
-        <!-- The Modal -->
+        <!-- Model that shows informations for the user after he clicks on the info button -->
         <div id="myModal" class="modal">
-            <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close">&times;</span>

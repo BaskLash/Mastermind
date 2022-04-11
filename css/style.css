@@ -3,31 +3,37 @@ body {
   margin: 0;
 }
 body .main {
-  width: 100%;
-  display: block;
+  width: 80%;
+  display: flex;
 }
-body .main h1 {
+body .main .mastermindField {
+  margin-left: 35rem;
+  display: block;
+  width: 60%;
+}
+body .main .mastermindField h1 {
   text-align: center;
 }
-body .main i {
+body .main .mastermindField i {
   cursor: pointer;
 }
-body .main .mastermind-area {
+body .main .mastermindField .mastermind-area {
   /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
-  width: 40%;
   margin: auto;
   display: block;
   border: 2px solid black;
+  margin-left: 1rem;
+  margin-right: 1rem;
   border-radius: 50px;
   text-align: center;
 }
-body .main .mastermind-area hr.solid {
+body .main .mastermindField .mastermind-area hr.solid {
   border-top: 3px solid black;
 }
-body .main .mastermind-area .mastermind-color-code-result {
+body .main .mastermindField .mastermind-area .mastermind-color-code-result {
   margin: 2rem;
 }
-body .main .mastermind-area .mastermind-color-code-result .circles {
+body .main .mastermindField .mastermind-area .mastermind-color-code-result .circles {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -36,10 +42,10 @@ body .main .mastermind-area .mastermind-color-code-result .circles {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .mastermind-area .mastermind-guesses {
+body .main .mastermindField .mastermind-area .mastermind-guesses {
   margin: 2rem;
 }
-body .main .mastermind-area .mastermind-guesses .circles {
+body .main .mastermindField .mastermind-area .mastermind-guesses .circles {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -48,12 +54,12 @@ body .main .mastermind-area .mastermind-guesses .circles {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .circle-options {
-  margin-left: 40rem;
+body .main .mastermindField .circle-options {
+  margin-left: 5rem;
   display: flex;
   margin-top: 2rem;
 }
-body .main .circle-options .circles:nth-child(1) {
+body .main .mastermindField .circle-options .circles:nth-child(1) {
   height: 50px;
   width: 50px;
   background-color: pink;
@@ -61,8 +67,9 @@ body .main .circle-options .circles:nth-child(1) {
   border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  cursor: pointer;
 }
-body .main .circle-options .circles:nth-child(2) {
+body .main .mastermindField .circle-options .circles:nth-child(2) {
   height: 50px;
   width: 50px;
   background-color: red;
@@ -70,8 +77,9 @@ body .main .circle-options .circles:nth-child(2) {
   border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  cursor: pointer;
 }
-body .main .circle-options .circles:nth-child(3) {
+body .main .mastermindField .circle-options .circles:nth-child(3) {
   height: 50px;
   width: 50px;
   background-color: lightblue;
@@ -79,8 +87,9 @@ body .main .circle-options .circles:nth-child(3) {
   border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  cursor: pointer;
 }
-body .main .circle-options .circles:nth-child(4) {
+body .main .mastermindField .circle-options .circles:nth-child(4) {
   height: 50px;
   width: 50px;
   background-color: blue;
@@ -88,8 +97,9 @@ body .main .circle-options .circles:nth-child(4) {
   border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  cursor: pointer;
 }
-body .main .circle-options .circles:nth-child(5) {
+body .main .mastermindField .circle-options .circles:nth-child(5) {
   height: 50px;
   width: 50px;
   background-color: yellow;
@@ -97,8 +107,9 @@ body .main .circle-options .circles:nth-child(5) {
   border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  cursor: pointer;
 }
-body .main .circle-options .circles:nth-child(6) {
+body .main .mastermindField .circle-options .circles:nth-child(6) {
   height: 50px;
   width: 50px;
   background-color: orange;
@@ -106,8 +117,9 @@ body .main .circle-options .circles:nth-child(6) {
   border: 2px solid black;
   display: inline-block;
   margin-right: 0.1rem;
+  cursor: pointer;
 }
-body .main .circle-options button {
+body .main .mastermindField .circle-options button {
   background-color: white;
   border: 1px solid black;
   margin-left: 2rem;
@@ -121,13 +133,38 @@ body .main .circle-options button {
   transition-duration: 0.4s;
   cursor: pointer;
 }
-body .main .circle-options button:hover {
+body .main .mastermindField .circle-options button:hover {
   background-color: black;
   color: white;
 }
-body .main .circle-options button i {
+body .main .mastermindField .circle-options button i {
   font-size: 22px;
   cursor: pointer;
+}
+body .main .rating {
+  margin-top: 16rem;
+  display: block;
+  width: 20%;
+}
+body .main .rating .rate {
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 20%;
+  border: 2px solid black;
+  margin-right: 2rem;
+  margin-bottom: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+body .main .rating .rate .circle {
+  margin-left: 0.1rem;
+  margin-top: 0.1rem;
+  height: 18px;
+  width: 18px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid black;
 }
 
 /* The Modal (background) */
