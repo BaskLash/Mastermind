@@ -33,7 +33,7 @@ body .main .mastermindField .mastermind-area hr.solid {
 body .main .mastermindField .mastermind-area .mastermind-color-code-result {
   margin: 2rem;
 }
-body .main .mastermindField .mastermind-area .mastermind-color-code-result .circles {
+body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -45,16 +45,13 @@ body .main .mastermindField .mastermind-area .mastermind-color-code-result .circ
 body .main .mastermindField .mastermind-area .mastermind-guesses {
   margin: 2rem;
 }
-body .main .mastermindField .mastermind-area .mastermind-guesses .circles {
-  height: 50px;
-  width: 50px;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid black;
-  display: inline-block;
-  margin-right: 2rem;
-}
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1 {
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1,
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt2,
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt3,
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt4,
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt5,
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt6,
+body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
   height: 50px;
   width: 50px;
   background-color: white;

@@ -28,7 +28,7 @@ body {
                 }
                 .mastermind-color-code-result {
                     margin: 2rem;
-                    .circles {
+                    .color-result {
                         height: 50px;
                         width: 50px;
                         background-color: white;
@@ -40,16 +40,13 @@ body {
                 }
                 .mastermind-guesses {
                     margin: 2rem;
-                    .circles {
-                        height: 50px;
-                        width: 50px;
-                        background-color: white;
-                        border-radius: 50%;
-                        border: 2px solid black;
-                        display: inline-block;
-                        margin-right: 2rem;
-                    }
-                    .attempt1 {
+                    .attempt1,
+                    .attempt2,
+                    .attempt3,
+                    .attempt4,
+                    .attempt5,
+                    .attempt6,
+                    .attempt7 {
                         height: 50px;
                         width: 50px;
                         background-color: white;
