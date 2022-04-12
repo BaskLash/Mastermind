@@ -5,7 +5,7 @@ body {
         width: 80%;
         display: flex;
         .mastermindField {
-            margin-left: 35rem;
+            margin-left: 38rem;
             display: block;
             width: 60%;
             h1 {
@@ -49,26 +49,32 @@ body {
                         display: inline-block;
                         margin-right: 2rem;
                     }
+                    .attempt1 {
+                        height: 50px;
+                        width: 50px;
+                        background-color: white;
+                        border-radius: 50%;
+                        border: 2px solid black;
+                        display: inline-block;
+                        margin-right: 2rem;
+                    }
                 }
             }
-            .circle-options {
+            #circle-options {
                 margin-left: 5rem;
                 display: flex;
                 margin-top: 2rem;
                 .circles:nth-child(1) {
                     height: 50px;
                     width: 50px;
-                    background-color: pink;
                     border-radius: 50%;
                     border: 2px solid black;
-                    display: inline-block;
                     margin-right: 2rem;
                     cursor: pointer;
                 }
                 .circles:nth-child(2) {
                     height: 50px;
                     width: 50px;
-                    background-color: red;
                     border-radius: 50%;
                     border: 2px solid black;
                     display: inline-block;
@@ -78,7 +84,6 @@ body {
                 .circles:nth-child(3) {
                     height: 50px;
                     width: 50px;
-                    background-color: lightblue;
                     border-radius: 50%;
                     border: 2px solid black;
                     display: inline-block;
@@ -88,7 +93,6 @@ body {
                 .circles:nth-child(4) {
                     height: 50px;
                     width: 50px;
-                    background-color: blue;
                     border-radius: 50%;
                     border: 2px solid black;
                     display: inline-block;
@@ -98,7 +102,6 @@ body {
                 .circles:nth-child(5) {
                     height: 50px;
                     width: 50px;
-                    background-color: yellow;
                     border-radius: 50%;
                     border: 2px solid black;
                     display: inline-block;
@@ -108,14 +111,13 @@ body {
                 .circles:nth-child(6) {
                     height: 50px;
                     width: 50px;
-                    background-color: orange;
                     border-radius: 50%;
                     border: 2px solid black;
                     display: inline-block;
                     margin-right: 0.1rem;
                     cursor: pointer;
                 }
-                button {
+                .delete {
                     background-color: white;
                     border: 1px solid black;
                     margin-left: 2rem;
