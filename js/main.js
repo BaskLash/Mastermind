@@ -186,6 +186,16 @@ function showResult() {
     }
 }
 
+document.getElementById("delete").addEventListener("click", function() {
+    elements = document.getElementsByClassName("attempt" + attempts);
+    for (var i = 0; i < elements.length; i++) {
+        if (i == (buttonClick - 1)) {
+            elements[i].style.backgroundColor = "white";
+            buttonClick--;
+        }
+    }
+})
+
 /* Information-Modal */
 // Get the modal
 var modal = document.getElementById("myModal");

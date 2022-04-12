@@ -1,6 +1,7 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: "Rubik Moonrocks", cursive;
 }
 body .main {
   width: 80%;
@@ -61,7 +62,7 @@ body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
   margin-right: 2rem;
 }
 body .main .mastermindField #circle-options {
-  margin-left: 5rem;
+  margin-left: 3rem;
   display: flex;
   margin-top: 2rem;
 }
@@ -118,12 +119,13 @@ body .main .mastermindField #circle-options .circles:nth-child(6) {
   margin-right: 0.1rem;
   cursor: pointer;
 }
-body .main .mastermindField #circle-options .delete {
+body .main .mastermindField #circle-options #delete {
   background-color: white;
   border: 1px solid black;
   margin-left: 2rem;
   border-radius: 10px;
   color: black;
+  width: 70px;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -132,11 +134,11 @@ body .main .mastermindField #circle-options .delete {
   transition-duration: 0.4s;
   cursor: pointer;
 }
-body .main .mastermindField #circle-options .delete:hover {
+body .main .mastermindField #circle-options #delete:hover {
   background-color: black;
   color: white;
 }
-body .main .mastermindField #circle-options .delete i {
+body .main .mastermindField #circle-options #delete i {
   font-size: 22px;
   cursor: pointer;
 }
@@ -199,7 +201,7 @@ body .main .rating .rate .rate-circle7 {
 /* Modal Content */
 .modal-content {
   position: relative;
-  background-color: #fefefe;
+  background-color: royalblue;
   margin: auto;
   padding: 0;
   border: 1px solid #888;
@@ -248,7 +250,7 @@ body .main .rating .rate .rate-circle7 {
 }
 
 .modal-header {
+  margin-bottom: 2rem;
   padding: 2px 16px;
-  background-color: royalblue;
   color: white;
 }/*# sourceMappingURL=style.css.map */

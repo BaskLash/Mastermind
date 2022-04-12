@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Mastermind</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Raleway:wght@600&family=Rubik+Moonrocks&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -83,7 +85,7 @@
                 <button class="circles" style="background-color: blue;"></button>
                 <button class="circles" style="background-color: yellow;"></button>
                 <button class="circles" style="background-color: orange;"></button>
-                <div class="delete"><i class="fa fa-angle-left"></i> Delete</div>
+                <div id="delete"><i class="fa fa-angle-left"></i> Delete</div>
             </div>
         </div>
         <div class="rating">
@@ -136,10 +138,9 @@
                 <div class="modal-header">
                     <span class="close">&times;</span>
                     <h2>Informations</h2>
-                    <p><span style="background-color: white;color: black;">Black circles</span>: They 're in the code and in the right position.</p>
-                    <p><span style="background-color: black;color: lightgray;">Gray circles</span>: They're in the code but not in the right position.</p>
-                    </p>
-                    <p><span style="background-color: black;color: white;">White circles</span>: They're not in the code</p>
+                    <li>Black circles: They 're in the code and in the right position.</li>
+                    <li>Gray circles: They're in the code but not in the right position.</li>
+                    <li>White circles: They're not in the code</li>
                 </div>
             </div>
         </div>
