@@ -156,7 +156,13 @@ body .main .rating .rate {
   display: flex;
   flex-wrap: wrap;
 }
-body .main .rating .rate .circle {
+body .main .rating .rate .rate-circle1,
+body .main .rating .rate .rate-circle2,
+body .main .rating .rate .rate-circle3,
+body .main .rating .rate .rate-circle4,
+body .main .rating .rate .rate-circle5,
+body .main .rating .rate .rate-circle6,
+body .main .rating .rate .rate-circle7 {
   margin-left: 0.1rem;
   margin-top: 0.1rem;
   height: 18px;

@@ -144,8 +144,10 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
                     won = true;
                 } else {
                     if (attempts == 7) {
+                        rateing(attempts, rightPosition, notRightPosition);
                         showResult();
                     } else {
+                        rateing(attempts, rightPosition, notRightPosition);
                         rightPosition = 0;
                         notRightPosition = 0;
                         attempts++;
@@ -156,6 +158,25 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
         }
     }
 })
+
+/* Show rating by filling the small circles */
+function rateing(attempts, rightPosition, notRightPosition) {
+    var rightPositionCounter = 0;
+    var notRightPositionCounter = 0;
+    elements = document.getElementsByClassName("rate-circle" + attempts);
+    for (var i = 0; i < elements.length; i++) {
+        if (rightPosition >= rightPositionCounter) {
+            console.log(rightPosition);
+            elements[i].style.backgroundColor = "black";
+            rightPositionCounter++;
+        }
+        if (notRightPosition >= notRightPositionCounter) {
+            console.log(notRightPosition)
+            elements[i].style.backgroundColor = "gray";
+            notRightPositionCounter++;
+        }
+    }
+}
 
 /* Show the result */
 function showResult() {
