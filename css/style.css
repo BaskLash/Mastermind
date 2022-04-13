@@ -43,6 +43,10 @@ body .main .mastermindField .mastermind-area .mastermind-color-code-result .colo
   display: inline-block;
   margin-right: 2rem;
 }
+body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
+  margin-top: 0.8rem;
+  width: 50%;
+}
 body .main .mastermindField .mastermind-area .mastermind-guesses {
   margin: 2rem;
 }

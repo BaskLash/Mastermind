@@ -37,6 +37,10 @@ body {
                         border: 2px solid black;
                         display: inline-block;
                         margin-right: 2rem;
+                        img {
+                            margin-top: 0.8rem;
+                            width: 50%;
+                        }
                     }
                 }
                 .mastermind-guesses {

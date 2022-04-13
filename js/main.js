@@ -180,6 +180,9 @@ function rateing(attempts, rightPosition, notRightPosition) {
 
 /* Show the result */
 function showResult() {
+    for (var i = 1; i < 5; i++) {
+        document.getElementById("questionmark" + i).style.display = "none";
+    }
     elements = document.getElementsByClassName("color-result");
     for (var i = 0; i < elements.length; i++) {
         elements[i].style.backgroundColor = colorcode[i];
