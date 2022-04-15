@@ -71,88 +71,27 @@ body .main .mastermindField #circle-options {
   display: flex;
   margin-top: 2rem;
 }
-body .main .mastermindField #circle-options .circles:nth-child(1) {
-  height: 50px;
-  width: 50px;
-  border: none;
-  border-radius: 50%;
-  margin-right: 2rem;
-  transition: 500ms;
-  cursor: pointer;
-}
-body .main .mastermindField #circle-options .circles:nth-child(1):hover {
-  transform: scale(1.5);
-  transition: 500ms;
-}
-body .main .mastermindField #circle-options .circles:nth-child(2) {
-  height: 50px;
-  width: 50px;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 2rem;
-  transition: 500ms;
-  cursor: pointer;
-}
-body .main .mastermindField #circle-options .circles:nth-child(2):hover {
-  transform: scale(1.5);
-  transition: 500ms;
-}
-body .main .mastermindField #circle-options .circles:nth-child(3) {
-  height: 50px;
-  width: 50px;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 2rem;
-  transition: 500ms;
-  cursor: pointer;
-}
-body .main .mastermindField #circle-options .circles:nth-child(3):hover {
-  transform: scale(1.5);
-  transition: 500ms;
-}
-body .main .mastermindField #circle-options .circles:nth-child(4) {
-  height: 50px;
-  width: 50px;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 2rem;
-  transition: 500ms;
-  cursor: pointer;
-}
-body .main .mastermindField #circle-options .circles:nth-child(4):hover {
-  transform: scale(1.5);
-  transition: 500ms;
-}
-body .main .mastermindField #circle-options .circles:nth-child(5) {
-  height: 50px;
-  width: 50px;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 2rem;
-  transition: 500ms;
-  cursor: pointer;
-}
-body .main .mastermindField #circle-options .circles:nth-child(5):hover {
-  transform: scale(1.5);
-  transition: 500ms;
-}
+body .main .mastermindField #circle-options .circles:nth-child(1),
+body .main .mastermindField #circle-options .circles:nth-child(2),
+body .main .mastermindField #circle-options .circles:nth-child(3),
+body .main .mastermindField #circle-options .circles:nth-child(4),
+body .main .mastermindField #circle-options .circles:nth-child(5),
 body .main .mastermindField #circle-options .circles:nth-child(6) {
   height: 50px;
   width: 50px;
   border: none;
   border-radius: 50%;
-  display: inline-block;
-  margin-right: 0.1rem;
+  margin-right: 2rem;
   transition: 500ms;
   cursor: pointer;
 }
+body .main .mastermindField #circle-options .circles:nth-child(1):hover,
+body .main .mastermindField #circle-options .circles:nth-child(2):hover,
+body .main .mastermindField #circle-options .circles:nth-child(3):hover,
+body .main .mastermindField #circle-options .circles:nth-child(4):hover,
+body .main .mastermindField #circle-options .circles:nth-child(5):hover,
 body .main .mastermindField #circle-options .circles:nth-child(6):hover {
-  transform: scale(1.5);
-  transition: 500ms;
+  border: 1px solid black;
 }
 body .main .mastermindField #circle-options #delete {
   background-color: white;
