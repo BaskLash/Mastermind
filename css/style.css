@@ -10,7 +10,7 @@ body .main {
 body .main .mastermindField {
   margin-left: 38rem;
   display: block;
-  width: 60%;
+  width: 100%;
 }
 body .main .mastermindField h1 {
   text-align: center;
@@ -66,62 +66,93 @@ body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
   margin-right: 2rem;
 }
 body .main .mastermindField #circle-options {
-  margin-left: 3rem;
+  margin: auto;
+  margin-left: 5rem;
   display: flex;
   margin-top: 2rem;
 }
 body .main .mastermindField #circle-options .circles:nth-child(1) {
   height: 50px;
   width: 50px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid black;
   margin-right: 2rem;
+  transition: 500ms;
   cursor: pointer;
+}
+body .main .mastermindField #circle-options .circles:nth-child(1):hover {
+  transform: scale(1.5);
+  transition: 500ms;
 }
 body .main .mastermindField #circle-options .circles:nth-child(2) {
   height: 50px;
   width: 50px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  transition: 500ms;
   cursor: pointer;
+}
+body .main .mastermindField #circle-options .circles:nth-child(2):hover {
+  transform: scale(1.5);
+  transition: 500ms;
 }
 body .main .mastermindField #circle-options .circles:nth-child(3) {
   height: 50px;
   width: 50px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  transition: 500ms;
   cursor: pointer;
+}
+body .main .mastermindField #circle-options .circles:nth-child(3):hover {
+  transform: scale(1.5);
+  transition: 500ms;
 }
 body .main .mastermindField #circle-options .circles:nth-child(4) {
   height: 50px;
   width: 50px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  transition: 500ms;
   cursor: pointer;
+}
+body .main .mastermindField #circle-options .circles:nth-child(4):hover {
+  transform: scale(1.5);
+  transition: 500ms;
 }
 body .main .mastermindField #circle-options .circles:nth-child(5) {
   height: 50px;
   width: 50px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid black;
   display: inline-block;
   margin-right: 2rem;
+  transition: 500ms;
   cursor: pointer;
+}
+body .main .mastermindField #circle-options .circles:nth-child(5):hover {
+  transform: scale(1.5);
+  transition: 500ms;
 }
 body .main .mastermindField #circle-options .circles:nth-child(6) {
   height: 50px;
   width: 50px;
+  border: none;
   border-radius: 50%;
-  border: 2px solid black;
   display: inline-block;
   margin-right: 0.1rem;
+  transition: 500ms;
   cursor: pointer;
+}
+body .main .mastermindField #circle-options .circles:nth-child(6):hover {
+  transform: scale(1.5);
+  transition: 500ms;
 }
 body .main .mastermindField #circle-options #delete {
   background-color: white;
@@ -196,7 +227,7 @@ body .main .rating .rate .rate-circle7 {
   /* Full height */
   overflow: auto;
   /* Enable scroll if needed */
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
@@ -352,19 +383,28 @@ body .main .rating .rate .rate-circle7 {
   }
 }
 @media screen and (max-width: 412px) {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
   body .main {
     width: 100%;
   }
   body .main .mastermindField {
-    margin-left: 0rem;
+    margin-left: 0.5rem;
     width: 80%;
   }
   body .main .mastermindField .mastermind-area {
     margin: 0;
   }
+  body .main .mastermindField .mastermind-area .mastermind-color-code-result {
+    margin: 1rem;
+  }
   body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result {
-    height: 10px;
-    width: 10px;
+    height: 25px;
+    width: 25px;
+  }
+  body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
+    margin-top: 0.4rem;
   }
   body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1,
 body .main .mastermindField .mastermind-area .mastermind-guesses .attempt2,
@@ -373,56 +413,61 @@ body .main .mastermindField .mastermind-area .mastermind-guesses .attempt4,
 body .main .mastermindField .mastermind-area .mastermind-guesses .attempt5,
 body .main .mastermindField .mastermind-area .mastermind-guesses .attempt6,
 body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options {
-    margin-left: 3rem;
+    height: 25px;
+    width: 25px;
   }
   body .main .mastermindField #circle-options .circles:nth-child(1) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    margin-right: 0.5rem;
   }
   body .main .mastermindField #circle-options .circles:nth-child(2) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    margin-right: 0.5rem;
   }
   body .main .mastermindField #circle-options .circles:nth-child(3) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    margin-right: 0.5rem;
   }
   body .main .mastermindField #circle-options .circles:nth-child(4) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    margin-right: 0.5rem;
   }
   body .main .mastermindField #circle-options .circles:nth-child(5) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    margin-right: 0.5rem;
   }
   body .main .mastermindField #circle-options .circles:nth-child(6) {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
+    margin-right: 0.5rem;
   }
   body .main .mastermindField #circle-options #delete {
-    margin-left: 2rem;
+    margin-left: 0.5rem;
     width: 60px;
     padding: 8px 16px;
-    font-size: 2px;
+    font-size: 10px;
+    font-weight: bold;
     margin-bottom: 1rem;
     transition-duration: 0.4s;
     cursor: pointer;
   }
   body .main .mastermindField #circle-options #delete i {
-    font-size: 8px;
+    font-size: 15px;
   }
   body .main .rating {
     width: 10%;
-    margin-top: 6rem;
-    margin-left: 2rem;
+    margin-top: 12rem;
+    margin-left: 0.5rem;
   }
   body .main .rating .rate {
-    height: 30px;
-    width: 30px;
+    height: 39px;
+    width: 39px;
+    margin-bottom: 0.45rem;
   }
   body .main .rating .rate .rate-circle1,
 body .main .rating .rate .rate-circle2,
@@ -431,7 +476,8 @@ body .main .rating .rate .rate-circle4,
 body .main .rating .rate .rate-circle5,
 body .main .rating .rate .rate-circle6,
 body .main .rating .rate .rate-circle7 {
-    height: 8px;
-    width: 8px;
+    margin-left: 0.1rem;
+    height: 13px;
+    width: 13px;
   }
 }/*# sourceMappingURL=style.css.map */

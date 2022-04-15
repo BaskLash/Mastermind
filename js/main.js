@@ -34,6 +34,8 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
         if (element.tagName == "BUTTON") {
             /* Get color from selected color of button */
             var color = element.style.backgroundColor;
+            element.disabled = true;
+            element.style.cursor = "not-allowed";
 
             if (color == "pink") {
                 IndexOfColorInArray = colorcode.indexOf("pink");
@@ -203,6 +205,11 @@ function rateing(attempts, rightPosition, notRightPosition) {
             elements[i].style.backgroundColor = "gray";
             notRightPositionCounter++;
         }
+    }
+    const circle_option_buttons = document.querySelectorAll(".circles");
+    for (let i = 0; i < circle_option_buttons.length; i++) {
+        circle_option_buttons[i].disabled = false;
+        circle_option_buttons[i].style.cursor = "pointer";
     }
     rightPositionCounter = 0;
     notRightPositionCounter = 0;
