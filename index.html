@@ -19,7 +19,7 @@
     <div class="main">
         <!-- Mastermind Field -->
         <div class="mastermindField">
-            <h1>Mastermind <i class="fa fa-info-circle" id="myBtn"></i></h1>
+            <h1>Mastermind <i class="fa fa-info-circle" id="information"></i></h1>
             <div class="mastermind-area">
                 <div class="mastermind-color-code-result">
                     <div class="color-result"><img id="questionmark1" src="assets/qeuestion_mark.png" alt=""></div>
@@ -136,8 +136,27 @@
                 <div class="rate-circle1"></div>
             </div>
         </div>
+
+        <!-- Model that appears when you have lost -->
+        <div id="youHaveLost" class="have_lost">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h1>You have lost!</h1>
+                </div>
+            </div>
+        </div>
+        <!-- Model that appears when you have won -->
+        <div id="youHaveWon" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h1>You have won!</h1>
+                </div>
+            </div>
+        </div>
         <!-- Model that shows informations for the user after he clicks on the info button -->
-        <div id="myModal" class="modal">
+        <div id="informationModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close">&times;</span>

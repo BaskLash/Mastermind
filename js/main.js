@@ -34,8 +34,7 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
         if (element.tagName == "BUTTON") {
             /* Get color from selected color of button */
             var color = element.style.backgroundColor;
-            element.disabled = true;
-            element.style.cursor = "not-allowed";
+            element.style.visibility = "hidden";
 
             if (color == "pink") {
                 IndexOfColorInArray = colorcode.indexOf("pink");
@@ -206,10 +205,10 @@ function rateing(attempts, rightPosition, notRightPosition) {
             notRightPositionCounter++;
         }
     }
+    /* Show all colors to select */
     const circle_option_buttons = document.querySelectorAll(".circles");
     for (let i = 0; i < circle_option_buttons.length; i++) {
-        circle_option_buttons[i].disabled = false;
-        circle_option_buttons[i].style.cursor = "pointer";
+        circle_option_buttons[i].style.visibility = "visible";
     }
     rightPositionCounter = 0;
     notRightPositionCounter = 0;
@@ -226,22 +225,82 @@ function showResult() {
     }
 }
 
+/* To delete a color from field */
 document.getElementById("delete").addEventListener("click", function() {
     elements = document.getElementsByClassName("attempt" + attempts);
     for (var i = 0; i < elements.length; i++) {
         if (i == (buttonClick - 1)) {
+            elementi = document.querySelectorAll(".circles");
+            for (var z = 0; z < elementi.length; z++) {
+                console.log(elementi[z].style.backgroundColor);
+                if (elementi[z].style.backgroundColor == elements[i].style.backgroundColor) {
+                    elementi[z].style.visibility = "visible";
+                }
+            }
             elements[i].style.backgroundColor = "white";
             buttonClick--;
         }
     }
 })
 
-/* Information-Modal */
-// Get the modal
-var modal = document.getElementById("myModal");
+/* Modal when you have won */
+var modal = document.getElementById("youHaveWon");
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("information");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+/* Modal when you have lost */
+var modal = document.getElementById("youHaveLost");
+
+// Get the button that opens the modal
+var btn = document.getElementById("information");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+/* Information-Modal */
+// Get the modal
+var modal = document.getElementById("informationModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("information");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
