@@ -147,11 +147,13 @@ body .main .rating .rate .rate-circle7 {
   border-radius: 50%;
   border: 2px solid black;
 }
-body .main .modal {
+body .main .modal,
+body .main .have_lost,
+body .main .have_won {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 300px;
   left: 0;
   top: 0;
   width: 100%;
@@ -160,7 +162,9 @@ body .main .modal {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-body .main .modal .modal-content {
+body .main .modal .modal-content,
+body .main .have_lost .modal-content,
+body .main .have_won .modal-content {
   position: relative;
   background-color: royalblue;
   margin: auto;
@@ -173,21 +177,68 @@ body .main .modal .modal-content {
   animation-name: animatetop;
   animation-duration: 0.4s;
 }
-body .main .modal .modal-content .modal-header {
+body .main .modal .modal-content .modal-header,
+body .main .have_lost .modal-content .modal-header,
+body .main .have_won .modal-content .modal-header {
   margin-bottom: 2rem;
   padding: 2px 16px;
   color: white;
 }
-body .main .modal .modal-content .modal-header .close {
+body .main .modal .modal-content .modal-header .close,
+body .main .modal .modal-content .modal-header #have_lost_close,
+body .main .modal .modal-content .modal-header #have_won_close,
+body .main .have_lost .modal-content .modal-header .close,
+body .main .have_lost .modal-content .modal-header #have_lost_close,
+body .main .have_lost .modal-content .modal-header #have_won_close,
+body .main .have_won .modal-content .modal-header .close,
+body .main .have_won .modal-content .modal-header #have_lost_close,
+body .main .have_won .modal-content .modal-header #have_won_close {
   color: white;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-body .main .modal .modal-content .modal-header .close:hover, body .main .modal .modal-content .modal-header .close:focus {
+body .main .modal .modal-content .modal-header .close:hover, body .main .modal .modal-content .modal-header .close:focus,
+body .main .modal .modal-content .modal-header #have_lost_close:hover,
+body .main .modal .modal-content .modal-header #have_lost_close:focus,
+body .main .modal .modal-content .modal-header #have_won_close:hover,
+body .main .modal .modal-content .modal-header #have_won_close:focus,
+body .main .have_lost .modal-content .modal-header .close:hover,
+body .main .have_lost .modal-content .modal-header .close:focus,
+body .main .have_lost .modal-content .modal-header #have_lost_close:hover,
+body .main .have_lost .modal-content .modal-header #have_lost_close:focus,
+body .main .have_lost .modal-content .modal-header #have_won_close:hover,
+body .main .have_lost .modal-content .modal-header #have_won_close:focus,
+body .main .have_won .modal-content .modal-header .close:hover,
+body .main .have_won .modal-content .modal-header .close:focus,
+body .main .have_won .modal-content .modal-header #have_lost_close:hover,
+body .main .have_won .modal-content .modal-header #have_lost_close:focus,
+body .main .have_won .modal-content .modal-header #have_won_close:hover,
+body .main .have_won .modal-content .modal-header #have_won_close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+body .main .modal .modal-content .modal-header .replay,
+body .main .have_lost .modal-content .modal-header .replay,
+body .main .have_won .modal-content .modal-header .replay {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+body .main .modal .modal-content .modal-header .replay:hover,
+body .main .have_lost .modal-content .modal-header .replay:hover,
+body .main .have_won .modal-content .modal-header .replay:hover {
+  background-color: white;
+  color: black;
 }
 
 /* Add Animation */

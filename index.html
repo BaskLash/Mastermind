@@ -141,17 +141,19 @@
         <div id="youHaveLost" class="have_lost">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="close">&times;</span>
+                    <span id="have_lost_close">&times;</span>
                     <h1>You have lost!</h1>
+                    <button onclick="replay()" class="replay">Replay</button>
                 </div>
             </div>
         </div>
         <!-- Model that appears when you have won -->
-        <div id="youHaveWon" class="modal">
+        <div id="youHaveWon" class="have_won">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="close">&times;</span>
+                    <span id="have_won_close">&times;</span>
                     <h1>You have won!</h1>
+                    <button onclick="replay()" class="replay">Replay</button>
                 </div>
             </div>
         </div>
