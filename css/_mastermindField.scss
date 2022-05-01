@@ -1,0 +1,112 @@
+.mastermindField {
+    margin-left: 38rem;
+    display: block;
+    width: 100%;
+    h1 {
+        text-align: center;
+        font-size: 45px;
+        margin: 1rem;
+    }
+    i {
+        cursor: pointer;
+    }
+    .mastermind-area {
+        /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
+        margin: auto;
+        display: block;
+        border: 2px solid white;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        hr.solid {
+            border-top: 3px solid black;
+            width: 100%;
+        }
+        .mastermind-color-code-result {
+            margin: 2rem;
+            .color-result {
+                height: 50px;
+                width: 50px;
+                background-color: white;
+                border-radius: 50%;
+                border: 2px solid black;
+                display: inline-block;
+                margin-right: 2rem;
+                img {
+                    margin-top: 0.8rem;
+                    width: 50%;
+                }
+            }
+        }
+        .mastermind-guesses {
+            margin: 2rem;
+            .attempt1,
+            .attempt2,
+            .attempt3,
+            .attempt4,
+            .attempt5,
+            .attempt6,
+            .attempt7,
+            .attempt8,
+            .attempt9 {
+                height: 50px;
+                width: 50px;
+                background-color: white;
+                border-radius: 50%;
+                border: 2px solid black;
+                display: inline-block;
+                margin-right: 2rem;
+            }
+        }
+    }
+    #circle-options {
+        margin: auto;
+        margin-left: 5rem;
+        display: flex;
+        margin-top: 2rem;
+        .circles:nth-child(1),
+        .circles:nth-child(2),
+        .circles:nth-child(3),
+        .circles:nth-child(4),
+        .circles:nth-child(5),
+        .circles:nth-child(6) {
+            height: 50px;
+            width: 50px;
+            border: none;
+            border-radius: 50%;
+            margin-right: 2rem;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            &:hover {
+                border: 4px solid black;
+            }
+        }
+        #delete {
+            background-color: white;
+            border: 1px solid black;
+            margin-left: 2rem;
+            border-radius: 10px;
+            color: black;
+            width: 70px;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            margin-bottom: 1rem;
+            transition-duration: 0.4s;
+            user-select: none;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            cursor: pointer;
+            &:hover {
+                background-color: black;
+                color: white;
+            }
+            i {
+                font-size: 22px;
+                cursor: pointer;
+            }
+        }
+    }
+}

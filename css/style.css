@@ -1,41 +1,52 @@
-body {
+* {
   padding: 0;
   margin: 0;
-  font-family: "Rubik Moonrocks", cursive;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+body {
+  font-family: "Tapestry", cursive;
 }
 body .main {
   width: 80%;
   display: flex;
-  /* The Modal (background) */
 }
-body .main .mastermindField {
+
+.mastermindField {
   margin-left: 38rem;
   display: block;
   width: 100%;
 }
-body .main .mastermindField h1 {
+.mastermindField h1 {
   text-align: center;
+  font-size: 45px;
+  margin: 1rem;
 }
-body .main .mastermindField i {
+.mastermindField i {
   cursor: pointer;
 }
-body .main .mastermindField .mastermind-area {
+.mastermindField .mastermind-area {
   /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
   margin: auto;
   display: block;
-  border: 2px solid black;
+  border: 2px solid white;
   margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 50px;
   text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-body .main .mastermindField .mastermind-area hr.solid {
+.mastermindField .mastermind-area hr.solid {
   border-top: 3px solid black;
+  width: 100%;
 }
-body .main .mastermindField .mastermind-area .mastermind-color-code-result {
+.mastermindField .mastermind-area .mastermind-color-code-result {
   margin: 2rem;
 }
-body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result {
+.mastermindField .mastermind-area .mastermind-color-code-result .color-result {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -44,20 +55,22 @@ body .main .mastermindField .mastermind-area .mastermind-color-code-result .colo
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
+.mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
   margin-top: 0.8rem;
   width: 50%;
 }
-body .main .mastermindField .mastermind-area .mastermind-guesses {
+.mastermindField .mastermind-area .mastermind-guesses {
   margin: 2rem;
 }
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt2,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt3,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt4,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt5,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt6,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
+.mastermindField .mastermind-area .mastermind-guesses .attempt1,
+.mastermindField .mastermind-area .mastermind-guesses .attempt2,
+.mastermindField .mastermind-area .mastermind-guesses .attempt3,
+.mastermindField .mastermind-area .mastermind-guesses .attempt4,
+.mastermindField .mastermind-area .mastermind-guesses .attempt5,
+.mastermindField .mastermind-area .mastermind-guesses .attempt6,
+.mastermindField .mastermind-area .mastermind-guesses .attempt7,
+.mastermindField .mastermind-area .mastermind-guesses .attempt8,
+.mastermindField .mastermind-area .mastermind-guesses .attempt9 {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -66,34 +79,35 @@ body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
   display: inline-block;
   margin-right: 2rem;
 }
-body .main .mastermindField #circle-options {
+.mastermindField #circle-options {
   margin: auto;
   margin-left: 5rem;
   display: flex;
   margin-top: 2rem;
 }
-body .main .mastermindField #circle-options .circles:nth-child(1),
-body .main .mastermindField #circle-options .circles:nth-child(2),
-body .main .mastermindField #circle-options .circles:nth-child(3),
-body .main .mastermindField #circle-options .circles:nth-child(4),
-body .main .mastermindField #circle-options .circles:nth-child(5),
-body .main .mastermindField #circle-options .circles:nth-child(6) {
+.mastermindField #circle-options .circles:nth-child(1),
+.mastermindField #circle-options .circles:nth-child(2),
+.mastermindField #circle-options .circles:nth-child(3),
+.mastermindField #circle-options .circles:nth-child(4),
+.mastermindField #circle-options .circles:nth-child(5),
+.mastermindField #circle-options .circles:nth-child(6) {
   height: 50px;
   width: 50px;
   border: none;
   border-radius: 50%;
   margin-right: 2rem;
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-body .main .mastermindField #circle-options .circles:nth-child(1):hover,
-body .main .mastermindField #circle-options .circles:nth-child(2):hover,
-body .main .mastermindField #circle-options .circles:nth-child(3):hover,
-body .main .mastermindField #circle-options .circles:nth-child(4):hover,
-body .main .mastermindField #circle-options .circles:nth-child(5):hover,
-body .main .mastermindField #circle-options .circles:nth-child(6):hover {
+.mastermindField #circle-options .circles:nth-child(1):hover,
+.mastermindField #circle-options .circles:nth-child(2):hover,
+.mastermindField #circle-options .circles:nth-child(3):hover,
+.mastermindField #circle-options .circles:nth-child(4):hover,
+.mastermindField #circle-options .circles:nth-child(5):hover,
+.mastermindField #circle-options .circles:nth-child(6):hover {
   border: 4px solid black;
 }
-body .main .mastermindField #circle-options #delete {
+.mastermindField #circle-options #delete {
   background-color: white;
   border: 1px solid black;
   margin-left: 2rem;
@@ -103,53 +117,28 @@ body .main .mastermindField #circle-options #delete {
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 1rem;
   transition-duration: 0.4s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   cursor: pointer;
 }
-body .main .mastermindField #circle-options #delete:hover {
+.mastermindField #circle-options #delete:hover {
   background-color: black;
   color: white;
 }
-body .main .mastermindField #circle-options #delete i {
+.mastermindField #circle-options #delete i {
   font-size: 22px;
   cursor: pointer;
 }
-body .main .rating {
-  margin-top: 16rem;
-  display: block;
-  width: 20%;
-}
-body .main .rating .rate {
-  height: 50px;
-  width: 50px;
-  background-color: white;
-  border-radius: 20%;
-  border: 2px solid black;
-  margin-right: 2rem;
-  margin-bottom: 1.4rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-body .main .rating .rate .rate-circle1,
-body .main .rating .rate .rate-circle2,
-body .main .rating .rate .rate-circle3,
-body .main .rating .rate .rate-circle4,
-body .main .rating .rate .rate-circle5,
-body .main .rating .rate .rate-circle6,
-body .main .rating .rate .rate-circle7 {
-  margin-left: 0.1rem;
-  margin-top: 0.1rem;
-  height: 18px;
-  width: 18px;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid black;
-}
-body .main .modal,
-body .main .have_lost,
-body .main .have_won {
+
+.modal,
+.have_lost,
+.have_won {
   display: none;
   position: fixed;
   z-index: 1;
@@ -162,9 +151,9 @@ body .main .have_won {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
-body .main .modal .modal-content,
-body .main .have_lost .modal-content,
-body .main .have_won .modal-content {
+.modal .modal-content,
+.have_lost .modal-content,
+.have_won .modal-content {
   position: relative;
   background-color: royalblue;
   margin: auto;
@@ -177,51 +166,61 @@ body .main .have_won .modal-content {
   animation-name: animatetop;
   animation-duration: 0.4s;
 }
-body .main .modal .modal-content .modal-header,
-body .main .have_lost .modal-content .modal-header,
-body .main .have_won .modal-content .modal-header {
+.modal .modal-content .modal-header,
+.have_lost .modal-content .modal-header,
+.have_won .modal-content .modal-header {
   margin-bottom: 2rem;
   padding: 2px 16px;
   color: white;
 }
-body .main .modal .modal-content .modal-header .close,
-body .main .modal .modal-content .modal-header #have_lost_close,
-body .main .modal .modal-content .modal-header #have_won_close,
-body .main .have_lost .modal-content .modal-header .close,
-body .main .have_lost .modal-content .modal-header #have_lost_close,
-body .main .have_lost .modal-content .modal-header #have_won_close,
-body .main .have_won .modal-content .modal-header .close,
-body .main .have_won .modal-content .modal-header #have_lost_close,
-body .main .have_won .modal-content .modal-header #have_won_close {
+.modal .modal-content .modal-header h2,
+.have_lost .modal-content .modal-header h2,
+.have_won .modal-content .modal-header h2 {
+  font-size: 50px;
+}
+.modal .modal-content .modal-header li,
+.have_lost .modal-content .modal-header li,
+.have_won .modal-content .modal-header li {
+  font-size: 20px;
+}
+.modal .modal-content .modal-header .close,
+.modal .modal-content .modal-header #have_lost_close,
+.modal .modal-content .modal-header #have_won_close,
+.have_lost .modal-content .modal-header .close,
+.have_lost .modal-content .modal-header #have_lost_close,
+.have_lost .modal-content .modal-header #have_won_close,
+.have_won .modal-content .modal-header .close,
+.have_won .modal-content .modal-header #have_lost_close,
+.have_won .modal-content .modal-header #have_won_close {
   color: white;
   float: right;
-  font-size: 28px;
+  font-size: 45px;
   font-weight: bold;
 }
-body .main .modal .modal-content .modal-header .close:hover, body .main .modal .modal-content .modal-header .close:focus,
-body .main .modal .modal-content .modal-header #have_lost_close:hover,
-body .main .modal .modal-content .modal-header #have_lost_close:focus,
-body .main .modal .modal-content .modal-header #have_won_close:hover,
-body .main .modal .modal-content .modal-header #have_won_close:focus,
-body .main .have_lost .modal-content .modal-header .close:hover,
-body .main .have_lost .modal-content .modal-header .close:focus,
-body .main .have_lost .modal-content .modal-header #have_lost_close:hover,
-body .main .have_lost .modal-content .modal-header #have_lost_close:focus,
-body .main .have_lost .modal-content .modal-header #have_won_close:hover,
-body .main .have_lost .modal-content .modal-header #have_won_close:focus,
-body .main .have_won .modal-content .modal-header .close:hover,
-body .main .have_won .modal-content .modal-header .close:focus,
-body .main .have_won .modal-content .modal-header #have_lost_close:hover,
-body .main .have_won .modal-content .modal-header #have_lost_close:focus,
-body .main .have_won .modal-content .modal-header #have_won_close:hover,
-body .main .have_won .modal-content .modal-header #have_won_close:focus {
+.modal .modal-content .modal-header .close:hover, .modal .modal-content .modal-header .close:focus,
+.modal .modal-content .modal-header #have_lost_close:hover,
+.modal .modal-content .modal-header #have_lost_close:focus,
+.modal .modal-content .modal-header #have_won_close:hover,
+.modal .modal-content .modal-header #have_won_close:focus,
+.have_lost .modal-content .modal-header .close:hover,
+.have_lost .modal-content .modal-header .close:focus,
+.have_lost .modal-content .modal-header #have_lost_close:hover,
+.have_lost .modal-content .modal-header #have_lost_close:focus,
+.have_lost .modal-content .modal-header #have_won_close:hover,
+.have_lost .modal-content .modal-header #have_won_close:focus,
+.have_won .modal-content .modal-header .close:hover,
+.have_won .modal-content .modal-header .close:focus,
+.have_won .modal-content .modal-header #have_lost_close:hover,
+.have_won .modal-content .modal-header #have_lost_close:focus,
+.have_won .modal-content .modal-header #have_won_close:hover,
+.have_won .modal-content .modal-header #have_won_close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-body .main .modal .modal-content .modal-header .replay,
-body .main .have_lost .modal-content .modal-header .replay,
-body .main .have_won .modal-content .modal-header .replay {
+.modal .modal-content .modal-header .replay,
+.have_lost .modal-content .modal-header .replay,
+.have_won .modal-content .modal-header .replay {
   background-color: black;
   border: 1px solid black;
   color: white;
@@ -234,34 +233,48 @@ body .main .have_won .modal-content .modal-header .replay {
   transition-duration: 0.4s;
   cursor: pointer;
 }
-body .main .modal .modal-content .modal-header .replay:hover,
-body .main .have_lost .modal-content .modal-header .replay:hover,
-body .main .have_won .modal-content .modal-header .replay:hover {
+.modal .modal-content .modal-header .replay:hover,
+.have_lost .modal-content .modal-header .replay:hover,
+.have_won .modal-content .modal-header .replay:hover {
   background-color: white;
   color: black;
 }
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
+.rating {
+  margin-top: 16.35rem;
+  display: block;
+  width: 20%;
 }
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
+.rating .rate {
+  height: 52px;
+  width: 52px;
+  background-color: white;
+  border-radius: 20%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 2px solid white;
+  margin-right: 2rem;
+  margin-bottom: 1.45rem;
+  display: flex;
+  flex-wrap: wrap;
 }
+.rating .rate .rate-circle1,
+.rating .rate .rate-circle2,
+.rating .rate .rate-circle3,
+.rating .rate .rate-circle4,
+.rating .rate .rate-circle5,
+.rating .rate .rate-circle6,
+.rating .rate .rate-circle7,
+.rating .rate .rate-circle8,
+.rating .rate .rate-circle9 {
+  margin-left: 0.1rem;
+  margin-top: 0.1rem;
+  height: 19px;
+  width: 19px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
 @media screen and (max-width: 1288px) {
   body .main {
     width: 100%;
@@ -557,5 +570,25 @@ body .main .rating .rate .rate-circle7 {
     margin-left: 0.1rem;
     height: 10px;
     width: 10px;
+  }
+}
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
   }
 }/*# sourceMappingURL=style.css.map */

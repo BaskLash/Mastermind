@@ -12,7 +12,9 @@
     <meta name="author" content="Olivier Luethy">
 
     <!-- To import the font-family -->
-    <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Raleway:wght@600&family=Rubik+Moonrocks&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,6 +31,20 @@
                 </div>
                 <hr class="solid">
                 <div class="mastermind-guesses">
+                    <br>
+                    <!-- Attempt nine -->
+                    <div class="attempt9"></div>
+                    <div class="attempt9"></div>
+                    <div class="attempt9"></div>
+                    <div class="attempt9"></div>
+                    <br>
+                    <br>
+                    <!-- Attempt eight -->
+                    <div class="attempt8"></div>
+                    <div class="attempt8"></div>
+                    <div class="attempt8"></div>
+                    <div class="attempt8"></div>
+                    <br>
                     <br>
                     <!-- Attempt seven -->
                     <div class="attempt7"></div>
@@ -93,6 +109,18 @@
         </div>
         <!-- For displaying how many colors were correct or not -->
         <div class="rating">
+            <div class="rate">
+                <div class="rate-circle9"></div>
+                <div class="rate-circle9"></div>
+                <div class="rate-circle9"></div>
+                <div class="rate-circle9"></div>
+            </div>
+            <div class="rate">
+                <div class="rate-circle8"></div>
+                <div class="rate-circle8"></div>
+                <div class="rate-circle8"></div>
+                <div class="rate-circle8"></div>
+            </div>
             <div class="rate">
                 <div class="rate-circle7"></div>
                 <div class="rate-circle7"></div>
@@ -163,9 +191,9 @@
                 <div class="modal-header">
                     <span class="close">&times;</span>
                     <h2>Informations</h2>
-                    <li>Black circles: They 're in the code and in the right position.</li>
-                    <li>Gray circles: They're in the code but not in the right position.</li>
-                    <li>White circles: They're not in the code</li>
+                    <li>Black circles: A color is in the code and in the right position.</li>
+                    <li>Gray circles: A color is in the code but not in the right position.</li>
+                    <li>White circles: A color is not in the code</li>
                 </div>
             </div>
         </div>

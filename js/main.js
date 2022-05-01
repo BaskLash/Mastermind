@@ -33,7 +33,7 @@ for (let i = 0; i < 4; i++) {
 console.log("ColorCode " + colorcode);
 /* Select all the elements from the id and check where something has been clicked */
 document.getElementById("circle-options").addEventListener("click", (e) => {
-    if (win == false) {
+    if (win == false && attempts < 10) {
         var element = e.target;
         if (element.tagName == "BUTTON") {
             /* Get color from selected color of button */
@@ -176,11 +176,13 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
                     rateing(attempts, rightPosition, notRightPosition);
                     winmodal.style.display = "block";
                     won = true;
+                    attempts++;
                 } else {
-                    if (attempts == 7) {
+                    if (attempts == 9) {
                         rateing(attempts, rightPosition, notRightPosition);
                         showResult();
                         lostmodal.style.display = "block";
+                        attempts++;
                     } else {
                         rateing(attempts, rightPosition, notRightPosition);
                         console.log("Finally Rightposition: " + rightPosition, "in the code but not right position: " + notRightPosition);
@@ -233,18 +235,20 @@ function showResult() {
 
 /* To delete a color from field */
 document.getElementById("delete").addEventListener("click", function() {
-    elements = document.getElementsByClassName("attempt" + attempts);
-    for (var i = 0; i < elements.length; i++) {
-        if (i == (buttonClick - 1)) {
-            elementi = document.querySelectorAll(".circles");
-            for (var z = 0; z < elementi.length; z++) {
-                console.log(elementi[z].style.backgroundColor);
-                if (elementi[z].style.backgroundColor == elements[i].style.backgroundColor) {
-                    elementi[z].style.visibility = "visible";
+    if (attempts != 10 && win == false) {
+        elements = document.getElementsByClassName("attempt" + attempts);
+        for (var i = 0; i < elements.length; i++) {
+            if (i == (buttonClick - 1)) {
+                elementi = document.querySelectorAll(".circles");
+                for (var z = 0; z < elementi.length; z++) {
+                    console.log(elementi[z].style.backgroundColor);
+                    if (elementi[z].style.backgroundColor == elements[i].style.backgroundColor) {
+                        elementi[z].style.visibility = "visible";
+                    }
                 }
+                elements[i].style.backgroundColor = "white";
+                buttonClick--;
             }
-            elements[i].style.backgroundColor = "white";
-            buttonClick--;
         }
     }
 })
