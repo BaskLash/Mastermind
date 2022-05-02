@@ -2,7 +2,7 @@
 var colorcode = [];
 /* To determine the index of the filled circle */
 var IndexOfColorInArray = 0;
-/* To check how many buttons he already has selected */
+/* To check how many colors the user has already selected for the attempt */
 var buttonClick = 0;
 /* Is needed to determine if player has won or not */
 var win = false;
@@ -18,9 +18,11 @@ var winmodal = document.getElementById("youHaveWon");
 var lostmodal = document.getElementById("youHaveLost");
 /* All the colors */
 var colors = ["pink", "red", "violet", "blue", "yellow", "black"];
-/* placeholder */
+/* Placeholder that helps to check if the random generated color is already in colorcode array */
 var placeholder;
+/* To store the amount of right positions */
 var rightPositionCounter = 0;
+/* To store the amount of colors that aren't in the right position */
 var notRightPositionCounter = 0;
 /* Select randomly 4 colors */
 for (let i = 0; i < 4; i++) {
@@ -31,144 +33,21 @@ for (let i = 0; i < 4; i++) {
     colorcode.push(placeholder);
 }
 console.log("ColorCode " + colorcode);
+
 /* Select all the elements from the id and check where something has been clicked */
 document.getElementById("circle-options").addEventListener("click", (e) => {
     if (win == false && attempts < 10) {
         var element = e.target;
         if (element.tagName == "BUTTON") {
+
             /* Get color from selected color of button */
             var color = element.style.backgroundColor;
             element.style.visibility = "hidden";
 
-            if (color == "pink") {
-                IndexOfColorInArray = colorcode.indexOf("pink");
-                console.log("ButtonIndex " + IndexOfColorInArray);
-                console.log("ButtonClick " + buttonClick);
-                if (colorcode.includes(color)) {
-                    if (buttonClick == IndexOfColorInArray) {
-                        /* In the right position */
-                        rightPosition++;
-                    } else {
-                        /* Not in the right position but in the code */
-                        notRightPosition++;
-                    }
-                }
-            }
-            if (color == "red") {
-                IndexOfColorInArray = colorcode.indexOf("red");
-                console.log("ButtonIndex " + IndexOfColorInArray);
-                console.log("ButtonClick " + buttonClick);
-                if (colorcode.includes(color)) {
-                    if (buttonClick == IndexOfColorInArray) {
-                        /* In the right position */
-                        rightPosition++;
-                    } else {
-                        /* Not in the right position but in the code */
-                        notRightPosition++;
-                    }
-                }
-            }
-            if (color == "violet") {
-                IndexOfColorInArray = colorcode.indexOf("violet");
-                console.log("ButtonIndex " + IndexOfColorInArray);
-                console.log("ButtonClick " + buttonClick);
-                if (colorcode.includes(color)) {
-                    if (buttonClick == IndexOfColorInArray) {
-                        /* In the right position */
-                        rightPosition++;
-                    } else {
-                        /* Not in the right position but in the code */
-                        notRightPosition++;
-                    }
-                }
-            }
-            if (color == "blue") {
-                IndexOfColorInArray = colorcode.indexOf("blue");
-                console.log("ButtonIndex " + IndexOfColorInArray);
-                console.log("ButtonClick " + buttonClick);
-                if (colorcode.includes(color)) {
-                    if (buttonClick == IndexOfColorInArray) {
-                        /* In the right position */
-                        rightPosition++;
-                    } else {
-                        /* Not in the right position but in the code */
-                        notRightPosition++;
-                    }
-                }
-            }
-            if (color == "yellow") {
-                IndexOfColorInArray = colorcode.indexOf("yellow");
-                console.log("ButtonIndex " + IndexOfColorInArray);
-                console.log("ButtonClick " + buttonClick);
-                if (colorcode.includes(color)) {
-                    if (buttonClick == IndexOfColorInArray) {
-                        /* In the right position */
-                        rightPosition++;
-                    } else {
-                        /* Not in the right position but in the code */
-                        notRightPosition++;
-                    }
-                }
-            }
-            if (color == "black") {
-                IndexOfColorInArray = colorcode.indexOf("black");
-                console.log("ButtonIndex " + IndexOfColorInArray);
-                console.log("ButtonClick " + buttonClick);
-                if (colorcode.includes(color)) {
-                    if (buttonClick == IndexOfColorInArray) {
-                        /* In the right position */
-                        rightPosition++;
-                    } else {
-                        /* Not in the right position but in the code */
-                        notRightPosition++;
-                    }
-                }
-            }
+            rightOrNotRight(color);
 
-            /* Set the color into the right circle */
-            if (color == "pink") {
-                elements = document.getElementsByClassName("attempt" + attempts);
-                for (var i = 0; i < elements.length; i++) {
-                    if (i == buttonClick) {
-                        elements[i].style.backgroundColor = "pink";
-                    }
-                }
-            } else if (color == "red") {
-                elements = document.getElementsByClassName("attempt" + attempts);
-                for (var i = 0; i < elements.length; i++) {
-                    if (i == buttonClick) {
-                        elements[i].style.backgroundColor = "red";
-                    }
-                }
-            } else if (color == "violet") {
-                elements = document.getElementsByClassName("attempt" + attempts);
-                for (var i = 0; i < elements.length; i++) {
-                    if (i == buttonClick) {
-                        elements[i].style.backgroundColor = "violet";
-                    }
-                }
-            } else if (color == "blue") {
-                elements = document.getElementsByClassName("attempt" + attempts);
-                for (var i = 0; i < elements.length; i++) {
-                    if (i == buttonClick) {
-                        elements[i].style.backgroundColor = "blue";
-                    }
-                }
-            } else if (color == "yellow") {
-                elements = document.getElementsByClassName("attempt" + attempts);
-                for (var i = 0; i < elements.length; i++) {
-                    if (i == buttonClick) {
-                        elements[i].style.backgroundColor = "yellow";
-                    }
-                }
-            } else if (color == "black") {
-                elements = document.getElementsByClassName("attempt" + attempts);
-                for (var i = 0; i < elements.length; i++) {
-                    if (i == buttonClick) {
-                        elements[i].style.backgroundColor = "black";
-                    }
-                }
-            }
+            putSelectedColorInCircle(color);
+
             buttonClick++;
             if (buttonClick == 4) {
                 if (rightPosition == 4) {
@@ -197,6 +76,37 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
         }
     }
 })
+
+/* Check if color is in the right position or not */
+function rightOrNotRight(color) {
+    IndexOfColorInArray = colorcode.indexOf(color);
+    console.log("ButtonIndex " + IndexOfColorInArray);
+    console.log("ButtonClick " + buttonClick);
+    if (colorcode.includes(color)) {
+        if (buttonClick == IndexOfColorInArray) {
+            /* In the right position */
+            rightPosition++;
+        } else {
+            /* Not in the right position but in the code */
+            notRightPosition++;
+        }
+    }
+}
+
+/* Set the color into the right circle */
+function putSelectedColorInCircle(color) {
+    elements = document.getElementsByClassName("attempt" + attempts);
+    for (var i = 0; i < elements.length; i++) {
+        if (i == buttonClick) {
+            elements[i].style.backgroundColor = color;
+        }
+    }
+}
+
+/* If the user want to replay the game */
+function replay() {
+    window.location = window.location;
+}
 
 /* Show rating by filling the small circles */
 function rateing(attempts, rightPosition, notRightPosition) {
@@ -308,8 +218,4 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
-
-function replay() {
-    window.location = window.location;
 }
