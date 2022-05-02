@@ -21,7 +21,7 @@
     <div class="main">
         <!-- Mastermind Field -->
         <div class="mastermindField">
-            <h1>Mastermind <i class="fa fa-info-circle" id="information"></i></h1>
+            <h1>Mastermind <i title="See detailed informations about this game" class="fa fa-info-circle" id="information"></i></h1>
             <div class="mastermind-area">
                 <div class="mastermind-color-code-result">
                     <div class="color-result"><img id="questionmark1" src="assets/qeuestion_mark.png" alt=""></div>
@@ -191,9 +191,18 @@
                 <div class="modal-header">
                     <span class="close">&times;</span>
                     <h2>Informations</h2>
+                    <h3>What is the goal of this game?</h3>
+                    <li>You have to find out the right color code.</li>
+                    <br>
+                    <h3>For what are the circles on the right?</h3>
+                    <li>In this circles will be shown how many selected colors are in the code and in the right position, how many colors are in the code but not in the right position and how many colors aren't in the code.</li>
+                    <li>But the colors will be only displayed, when you have selected 4 colors for an attempt!</li>
+                    <br>
+                    <h3>What do the colors in the right circles exactly define?</h3>
                     <li>Black circles: A color is in the code and in the right position.</li>
                     <li>Gray circles: A color is in the code but not in the right position.</li>
                     <li>White circles: A color is not in the code</li>
+                    <br>
                 </div>
             </div>
         </div>

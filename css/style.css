@@ -142,7 +142,7 @@ body .main {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 300px;
+  padding-top: 200px;
   left: 0;
   top: 0;
   width: 100%;
@@ -177,6 +177,11 @@ body .main {
 .have_lost .modal-content .modal-header h2,
 .have_won .modal-content .modal-header h2 {
   font-size: 50px;
+}
+.modal .modal-content .modal-header h3,
+.have_lost .modal-content .modal-header h3,
+.have_won .modal-content .modal-header h3 {
+  font-size: 30px;
 }
 .modal .modal-content .modal-header li,
 .have_lost .modal-content .modal-header li,
