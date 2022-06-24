@@ -32,7 +32,6 @@ for (let i = 0; i < 4; i++) {
     }
     colorcode.push(placeholder);
 }
-console.log("ColorCode " + colorcode);
 
 /* Select all the elements from the id and check where something has been clicked */
 document.getElementById("circle-options").addEventListener("click", (e) => {
@@ -51,7 +50,6 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
             buttonClick++;
             if (buttonClick == 4) {
                 if (rightPosition == 4) {
-                    console.log("Finally Rightposition: " + rightPosition, "in the code but not right position: " + notRightPosition);
                     rateing(attempts, rightPosition, notRightPosition);
                     winmodal.style.display = "block";
                     won = true;
@@ -64,7 +62,6 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
                         attempts++;
                     } else {
                         rateing(attempts, rightPosition, notRightPosition);
-                        console.log("Finally Rightposition: " + rightPosition, "in the code but not right position: " + notRightPosition);
                         rightPosition = 0;
                         notRightPosition = 0;
                         attempts++;
@@ -80,8 +77,6 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
 /* Check if color is in the right position or not */
 function rightOrNotRight(color) {
     IndexOfColorInArray = colorcode.indexOf(color);
-    console.log("ButtonIndex " + IndexOfColorInArray);
-    console.log("ButtonClick " + buttonClick);
     if (colorcode.includes(color)) {
         if (buttonClick == IndexOfColorInArray) {
             /* In the right position */
@@ -111,14 +106,11 @@ function replay() {
 /* Show rating by filling the small circles */
 function rateing(attempts, rightPosition, notRightPosition) {
     elements = document.getElementsByClassName("rate-circle" + attempts);
-    console.log("Finally Rightposition by rating: " + rightPosition, "in the code but not right position: " + notRightPosition);
     for (var i = 0; i < elements.length; i++) {
         if (rightPosition > rightPositionCounter) {
-            console.log("Inside while of rightposition: " + rightPosition + " " + rightPositionCounter);
             elements[i].style.backgroundColor = "black";
             rightPositionCounter++;
         } else if (notRightPosition > notRightPositionCounter) {
-            console.log("Inside while of notRightPosition: " + notRightPosition + " " + notRightPositionCounter);
             elements[i].style.backgroundColor = "gray";
             notRightPositionCounter++;
         }
@@ -151,7 +143,6 @@ document.getElementById("delete").addEventListener("click", function() {
             if (i == (buttonClick - 1)) {
                 elementi = document.querySelectorAll(".circles");
                 for (var z = 0; z < elementi.length; z++) {
-                    console.log(elementi[z].style.backgroundColor);
                     if (elementi[z].style.backgroundColor == elements[i].style.backgroundColor) {
                         elementi[z].style.visibility = "visible";
                     }
