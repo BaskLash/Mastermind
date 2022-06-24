@@ -70,7 +70,8 @@ body .main {
 .mastermindField .mastermind-area .mastermind-guesses .attempt6,
 .mastermindField .mastermind-area .mastermind-guesses .attempt7,
 .mastermindField .mastermind-area .mastermind-guesses .attempt8,
-.mastermindField .mastermind-area .mastermind-guesses .attempt9 {
+.mastermindField .mastermind-area .mastermind-guesses .attempt9,
+.mastermindField .mastermind-area .mastermind-guesses .attempt10 {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -270,7 +271,8 @@ body .main {
 .rating .rate .rate-circle6,
 .rating .rate .rate-circle7,
 .rating .rate .rate-circle8,
-.rating .rate .rate-circle9 {
+.rating .rate .rate-circle9,
+.rating .rate .rate-circle10 {
   margin-left: 0.1rem;
   margin-top: 0.1rem;
   height: 19px;

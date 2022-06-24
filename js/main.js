@@ -36,7 +36,7 @@ console.log("ColorCode " + colorcode);
 
 /* Select all the elements from the id and check where something has been clicked */
 document.getElementById("circle-options").addEventListener("click", (e) => {
-    if (win == false && attempts < 10) {
+    if (win == false && attempts < 11) {
         var element = e.target;
         if (element.tagName == "BUTTON") {
 
@@ -57,7 +57,7 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
                     won = true;
                     attempts++;
                 } else {
-                    if (attempts == 9) {
+                    if (attempts == 10) {
                         rateing(attempts, rightPosition, notRightPosition);
                         showResult();
                         lostmodal.style.display = "block";
