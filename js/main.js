@@ -1,30 +1,31 @@
-/* Array which will store the color code */
+/* Array to store the color code */
 var colorcode = [];
-/* To determine the index of the filled circle */
-var IndexOfColorInArray = 0;
 /* To check how many colors the user has already selected for the attempt */
 var buttonClick = 0;
-/* Is needed to determine if player has won or not */
+/* Tracks if player has won */
 var win = false;
-/* Counts the needed attempts which the user need */
+/* Counts the attempts */
 var attempts = 1;
-/* Varible for right positions */
+/* Variable for right positions */
 var rightPosition = 0;
-/* Variable for not right position but in array */
+/* Variable for colors in code but not in right position */
 var notRightPosition = 0;
+/* Array to store user's current attempt */
+var userAttempt = [];
 /* Modal when you have won */
 var winmodal = document.getElementById("youHaveWon");
 /* Modal when you have lost */
 var lostmodal = document.getElementById("youHaveLost");
-/* All the colors */
+/* All available colors */
 var colors = ["pink", "red", "violet", "blue", "yellow", "black"];
-/* Placeholder that helps to check if the random generated color is already in colorcode array */
+/* Placeholder for random color selection */
 var placeholder;
 /* To store the amount of right positions */
 var rightPositionCounter = 0;
 /* To store the amount of colors that aren't in the right position */
 var notRightPositionCounter = 0;
-/* Select randomly 4 colors */
+
+/* Generate random color code with 4 unique colors */
 for (let i = 0; i < 4; i++) {
   placeholder = colors[Math.floor(Math.random() * colors.length)];
   while (colorcode.includes(placeholder)) {
@@ -34,47 +35,41 @@ for (let i = 0; i < 4; i++) {
 }
 console.log("Color Code " + colorcode);
 
-/* Select all the elements from the id and check where something has been clicked */
+/* Handle color selection */
 document.getElementById("circle-options").addEventListener("click", (e) => {
   if (win == false && attempts < 11) {
     var element = e.target;
     if (element.tagName == "BUTTON") {
-      /* Get color from selected color of button */
       var color = element.style.backgroundColor;
       element.style.visibility = "hidden";
 
       rightOrNotRight(color);
-
       putSelectedColorInCircle(color);
 
       buttonClick++;
       if (buttonClick == 4) {
+        validateAttempt();
         if (rightPosition == 4) {
-          console.log(
-            "Finally Rightposition: " + rightPosition,
-            "in the code but not right position: " + notRightPosition
-          );
           rateing(attempts, rightPosition, notRightPosition);
           winmodal.style.display = "block";
-          won = true;
+          win = true;
           attempts++;
         } else {
+          rateing(attempts, rightPosition, notRightPosition);
           if (attempts == 10) {
-            rateing(attempts, rightPosition, notRightPosition);
             showResult();
             lostmodal.style.display = "block";
             attempts++;
           } else {
-            rateing(attempts, rightPosition, notRightPosition);
-            console.log(
-              "Finally Rightposition: " + rightPosition,
-              "in the code but not right position: " + notRightPosition
-            );
             rightPosition = 0;
             notRightPosition = 0;
             attempts++;
             buttonClick = 0;
-            IndexOfColorInArray = 0;
+            userAttempt = [];
+            const circle_option_buttons = document.querySelectorAll(".circles");
+            for (let btn of circle_option_buttons) {
+              btn.style.visibility = "visible";
+            }
           }
         }
       }
@@ -82,64 +77,65 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
   }
 });
 
-/* Check if color is in the right position or not */
+/* Store the selected color in userAttempt */
 function rightOrNotRight(color) {
-  if (colorcode[buttonClick] === color) {
-    /* In the right position */
-    rightPosition++;
-  } else if (colorcode.includes(color)) {
-    /* Not in the right position but in the code */
-    notRightPosition++;
-  }
+  userAttempt.push(color);
 }
 
-/* Set the color into the right circle */
-function putSelectedColorInCircle(color) {
-  elements = document.getElementsByClassName("attempt" + attempts);
-  for (var i = 0; i < elements.length; i++) {
-    if (i == buttonClick) {
-      elements[i].style.backgroundColor = color;
+/* Validate the user's attempt */
+function validateAttempt() {
+  let tempColorCode = [...colorcode];
+  let tempAttempt = [...userAttempt];
+  rightPosition = 0;
+  notRightPosition = 0;
+
+  // First pass: Check for correct position (black pegs)
+  for (let i = 0; i < 4; i++) {
+    if (tempAttempt[i] === tempColorCode[i]) {
+      rightPosition++;
+      tempColorCode[i] = null;
+      tempAttempt[i] = null;
     }
   }
+
+  // Second pass: Check for correct color, wrong position (gray pegs)
+  for (let i = 0; i < 4; i++) {
+    if (tempAttempt[i] !== null) {
+      const index = tempColorCode.indexOf(tempAttempt[i]);
+      if (index !== -1) {
+        notRightPosition++;
+        tempColorCode[index] = null;
+      }
+    }
+  }
+  console.log(
+    "Right Position: " + rightPosition,
+    "Wrong Position: " + notRightPosition
+  );
 }
 
-/* If the user want to replay the game */
+/* Set the color into the correct circle */
+function putSelectedColorInCircle(color) {
+  let elements = document.getElementsByClassName("attempt" + attempts);
+  elements[buttonClick].style.backgroundColor = color;
+}
+
+/* Replay the game */
 function replay() {
   window.location = window.location;
 }
 
-/* Show rating by filling the small circles */
+/* Display rating by filling the small circles */
 function rateing(attempts, rightPosition, notRightPosition) {
-  elements = document.getElementsByClassName("rate-circle" + attempts);
-  console.log(
-    "Finally Rightposition by rating: " + rightPosition,
-    "in the code but not right position: " + notRightPosition
-  );
-  for (var i = 0; i < elements.length; i++) {
+  let elements = document.getElementsByClassName("rate-circle" + attempts);
+  for (let i = 0; i < elements.length; i++) {
     if (rightPosition > rightPositionCounter) {
-      console.log(
-        "Inside while of rightposition: " +
-          rightPosition +
-          " " +
-          rightPositionCounter
-      );
       elements[i].style.backgroundColor = "black";
       rightPositionCounter++;
     } else if (notRightPosition > notRightPositionCounter) {
-      console.log(
-        "Inside while of notRightPosition: " +
-          notRightPosition +
-          " " +
-          notRightPositionCounter
-      );
       elements[i].style.backgroundColor = "gray";
       notRightPositionCounter++;
     }
-  }
-  /* Show all colors to select */
-  const circle_option_buttons = document.querySelectorAll(".circles");
-  for (let i = 0; i < circle_option_buttons.length; i++) {
-    circle_option_buttons[i].style.visibility = "visible";
   }
   rightPositionCounter = 0;
   notRightPositionCounter = 0;
@@ -150,86 +146,61 @@ function showResult() {
   for (var i = 1; i < 5; i++) {
     document.getElementById("questionmark" + i).style.display = "none";
   }
-  elements = document.getElementsByClassName("color-result");
-  for (var i = 0; i < elements.length; i++) {
+  let elements = document.getElementsByClassName("color-result");
+  for (let i = 0; i < elements.length; i++) {
     elements[i].style.backgroundColor = colorcode[i];
   }
 }
 
-/* To delete a color from field */
+/* Delete a color from the field */
 document.getElementById("delete").addEventListener("click", function () {
-  if (attempts != 10 && win == false) {
-    elements = document.getElementsByClassName("attempt" + attempts);
-    for (var i = 0; i < elements.length; i++) {
-      if (i == buttonClick - 1) {
-        elementi = document.querySelectorAll(".circles");
-        for (var z = 0; z < elementi.length; z++) {
-          console.log(elementi[z].style.backgroundColor);
-          if (
-            elementi[z].style.backgroundColor ==
-            elements[i].style.backgroundColor
-          ) {
-            elementi[z].style.visibility = "visible";
-          }
-        }
-        elements[i].style.backgroundColor = "white";
-        buttonClick--;
+  if (attempts != 10 && win == false && buttonClick > 0) {
+    buttonClick--;
+    let elements = document.getElementsByClassName("attempt" + attempts);
+    elements[buttonClick].style.backgroundColor = "white";
+
+    let deletedColor = userAttempt.pop();
+
+    const colorButtons = document.querySelectorAll(".circles");
+    for (let btn of colorButtons) {
+      if (btn.style.backgroundColor === deletedColor) {
+        btn.style.visibility = "visible";
+        break;
       }
     }
   }
 });
 
-// Get the <span> element that closes the modal
+/* Modal close handlers */
 var winspan = document.getElementById("have_won_close");
-
-// When the user clicks on <span> (x), close the modal
 winspan.onclick = function () {
   winmodal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == winmodal) {
-    winmodal.style.display = "none";
-  }
-};
-
-// Get the <span> element that closes the modal
 var lostspan = document.getElementById("have_lost_close");
-
-// When the user clicks on <span> (x), close the modal
 lostspan.onclick = function () {
   lostmodal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-  if (event.target == lostmodal) {
-    lostmodal.style.display = "none";
+  if (event.target == winmodal || event.target == lostmodal) {
+    event.target.style.display = "none";
   }
 };
 
-/* Information-Modal */
-// Get the modal
+/* Information Modal */
 var modal = document.getElementById("informationModal");
-
-// Get the button that opens the modal
 var btn = document.getElementById("information");
-
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
 btn.onclick = function () {
   modal.style.display = "block";
 };
 
-// When the user clicks on <span> (x), close the modal
 span.onclick = function () {
   modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
