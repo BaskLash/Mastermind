@@ -84,17 +84,12 @@ document.getElementById("circle-options").addEventListener("click", (e) => {
 
 /* Check if color is in the right position or not */
 function rightOrNotRight(color) {
-  IndexOfColorInArray = colorcode.indexOf(color);
-  console.log("ButtonIndex " + IndexOfColorInArray);
-  console.log("ButtonClick " + buttonClick);
-  if (colorcode.includes(color)) {
-    if (buttonClick == IndexOfColorInArray) {
-      /* In the right position */
-      rightPosition++;
-    } else {
-      /* Not in the right position but in the code */
-      notRightPosition++;
-    }
+  if (colorcode[buttonClick] === color) {
+    /* In the right position */
+    rightPosition++;
+  } else if (colorcode.includes(color)) {
+    /* Not in the right position but in the code */
+    notRightPosition++;
   }
 }
 
