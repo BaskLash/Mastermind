@@ -1,601 +1,235 @@
+/* Minimal custom styles on top of Tailwind */
+
 * {
-  padding: 0;
-  margin: 0;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+html,
 body {
-  font-family: "Tapestry", cursive;
-}
-body .main {
-  width: 80%;
-  display: flex;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
-.mastermindField {
-  margin-left: 38rem;
-  display: block;
-  width: 100%;
-}
-.mastermindField h1 {
-  text-align: center;
-  font-size: 45px;
-  margin: 1rem;
-}
-.mastermindField i {
-  cursor: pointer;
-}
-.mastermindField .mastermind-area {
-  /* https://www.w3schools.com/css/tryit.asp?filename=trycss_align_container */
-  margin: auto;
-  display: block;
-  border: 2px solid white;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  border-radius: 50px;
-  text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.mastermindField .mastermind-area hr.solid {
-  border-top: 3px solid black;
-  width: 100%;
-}
-.mastermindField .mastermind-area .mastermind-color-code-result {
-  margin: 2rem;
-}
-.mastermindField .mastermind-area .mastermind-color-code-result .color-result {
-  height: 50px;
-  width: 50px;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid black;
-  display: inline-block;
-  margin-right: 2rem;
-}
-.mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
-  margin-top: 0.8rem;
-  width: 50%;
-}
-.mastermindField .mastermind-area .mastermind-guesses {
-  margin: 2rem;
-}
-.mastermindField .mastermind-area .mastermind-guesses .attempt1,
-.mastermindField .mastermind-area .mastermind-guesses .attempt2,
-.mastermindField .mastermind-area .mastermind-guesses .attempt3,
-.mastermindField .mastermind-area .mastermind-guesses .attempt4,
-.mastermindField .mastermind-area .mastermind-guesses .attempt5,
-.mastermindField .mastermind-area .mastermind-guesses .attempt6,
-.mastermindField .mastermind-area .mastermind-guesses .attempt7,
-.mastermindField .mastermind-area .mastermind-guesses .attempt8,
-.mastermindField .mastermind-area .mastermind-guesses .attempt9,
-.mastermindField .mastermind-area .mastermind-guesses .attempt10 {
-  height: 50px;
-  width: 50px;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid black;
-  display: inline-block;
-  margin-right: 2rem;
-}
-.mastermindField #circle-options {
-  margin: auto;
-  margin-left: 5rem;
-  display: flex;
-  margin-top: 2rem;
-}
-.mastermindField #circle-options .circles:nth-child(1),
-.mastermindField #circle-options .circles:nth-child(2),
-.mastermindField #circle-options .circles:nth-child(3),
-.mastermindField #circle-options .circles:nth-child(4),
-.mastermindField #circle-options .circles:nth-child(5),
-.mastermindField #circle-options .circles:nth-child(6) {
-  height: 50px;
-  width: 50px;
-  border: none;
-  border-radius: 50%;
-  margin-right: 2rem;
-  cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.mastermindField #circle-options .circles:nth-child(1):hover,
-.mastermindField #circle-options .circles:nth-child(2):hover,
-.mastermindField #circle-options .circles:nth-child(3):hover,
-.mastermindField #circle-options .circles:nth-child(4):hover,
-.mastermindField #circle-options .circles:nth-child(5):hover,
-.mastermindField #circle-options .circles:nth-child(6):hover {
-  border: 4px solid black;
-}
-.mastermindField #circle-options #delete {
-  background-color: white;
-  border: 1px solid black;
-  margin-left: 2rem;
-  border-radius: 10px;
-  color: black;
-  width: 70px;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  margin-bottom: 1rem;
-  transition-duration: 0.4s;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  cursor: pointer;
-}
-.mastermindField #circle-options #delete:hover {
-  background-color: black;
-  color: white;
-}
-.mastermindField #circle-options #delete i {
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.modal,
-.have_lost,
-.have_won {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 200px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.modal .modal-content,
-.have_lost .modal-content,
-.have_won .modal-content {
+/* --- Pegs ------------------------------------------------------------- */
+.peg {
+  width: 46px;
+  height: 46px;
+  border-radius: 9999px;
   position: relative;
-  background-color: royalblue;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-}
-.modal .modal-content .modal-header,
-.have_lost .modal-content .modal-header,
-.have_won .modal-content .modal-header {
-  margin-bottom: 2rem;
-  padding: 2px 16px;
-  color: white;
-}
-.modal .modal-content .modal-header h2,
-.have_lost .modal-content .modal-header h2,
-.have_won .modal-content .modal-header h2 {
-  font-size: 50px;
-}
-.modal .modal-content .modal-header h3,
-.have_lost .modal-content .modal-header h3,
-.have_won .modal-content .modal-header h3 {
-  font-size: 30px;
-}
-.modal .modal-content .modal-header li,
-.have_lost .modal-content .modal-header li,
-.have_won .modal-content .modal-header li {
-  font-size: 20px;
-}
-.modal .modal-content .modal-header .close,
-.modal .modal-content .modal-header #have_lost_close,
-.modal .modal-content .modal-header #have_won_close,
-.have_lost .modal-content .modal-header .close,
-.have_lost .modal-content .modal-header #have_lost_close,
-.have_lost .modal-content .modal-header #have_won_close,
-.have_won .modal-content .modal-header .close,
-.have_won .modal-content .modal-header #have_lost_close,
-.have_won .modal-content .modal-header #have_won_close {
-  color: white;
-  float: right;
-  font-size: 45px;
-  font-weight: bold;
-}
-.modal .modal-content .modal-header .close:hover, .modal .modal-content .modal-header .close:focus,
-.modal .modal-content .modal-header #have_lost_close:hover,
-.modal .modal-content .modal-header #have_lost_close:focus,
-.modal .modal-content .modal-header #have_won_close:hover,
-.modal .modal-content .modal-header #have_won_close:focus,
-.have_lost .modal-content .modal-header .close:hover,
-.have_lost .modal-content .modal-header .close:focus,
-.have_lost .modal-content .modal-header #have_lost_close:hover,
-.have_lost .modal-content .modal-header #have_lost_close:focus,
-.have_lost .modal-content .modal-header #have_won_close:hover,
-.have_lost .modal-content .modal-header #have_won_close:focus,
-.have_won .modal-content .modal-header .close:hover,
-.have_won .modal-content .modal-header .close:focus,
-.have_won .modal-content .modal-header #have_lost_close:hover,
-.have_won .modal-content .modal-header #have_lost_close:focus,
-.have_won .modal-content .modal-header #have_won_close:hover,
-.have_won .modal-content .modal-header #have_won_close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-.modal .modal-content .modal-header .replay,
-.have_lost .modal-content .modal-header .replay,
-.have_won .modal-content .modal-header .replay {
-  background-color: black;
-  border: 1px solid black;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-.modal .modal-content .modal-header .replay:hover,
-.have_lost .modal-content .modal-header .replay:hover,
-.have_won .modal-content .modal-header .replay:hover {
-  background-color: white;
-  color: black;
+  background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 55%),
+    var(--peg-color, #334155);
+  box-shadow: inset -2px -3px 6px rgba(0, 0, 0, 0.45),
+    inset 2px 3px 6px rgba(255, 255, 255, 0.15),
+    0 6px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
 
-.rating {
-  margin-top: 16.35rem;
-  display: block;
-  width: 20%;
+.peg.sm {
+  width: 32px;
+  height: 32px;
 }
-.rating .rate {
-  height: 52px;
+
+.peg.draggable {
+  cursor: grab;
+}
+
+.peg.draggable:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.peg.dragging {
+  opacity: 0.35;
+  cursor: grabbing;
+}
+
+.peg.hidden {
+  visibility: hidden;
+}
+
+/* --- Slots ------------------------------------------------------------ */
+.slot {
   width: 52px;
-  background-color: white;
-  border-radius: 20%;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border: 2px solid white;
-  margin-right: 2rem;
-  margin-bottom: 1.45rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-.rating .rate .rate-circle1,
-.rating .rate .rate-circle2,
-.rating .rate .rate-circle3,
-.rating .rate .rate-circle4,
-.rating .rate .rate-circle5,
-.rating .rate .rate-circle6,
-.rating .rate .rate-circle7,
-.rating .rate .rate-circle8,
-.rating .rate .rate-circle9,
-.rating .rate .rate-circle10 {
-  margin-left: 0.1rem;
-  margin-top: 0.1rem;
-  height: 19px;
-  width: 19px;
-  background-color: white;
-  border-radius: 50%;
-  border: 2px solid black;
+  height: 52px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed rgba(255, 255, 255, 0.12);
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-@media screen and (max-width: 1288px) {
-  body .main {
-    width: 100%;
-  }
-  body .main .mastermindField {
-    margin-left: 12rem;
-  }
+.slot.filled {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
 }
-@media screen and (max-width: 860px) {
-  body .main {
-    width: 100%;
-  }
-  body .main .mastermindField {
-    margin-left: 0rem;
-    width: 35%;
-  }
-  body .main .mastermindField .mastermind-area {
-    margin: 0;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt2,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt3,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt4,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt5,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt6,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options {
-    margin-left: 1rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(1) {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(2) {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(3) {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(4) {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(5) {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(6) {
-    height: 10px;
-    width: 10px;
-  }
-  body .main .mastermindField #circle-options #delete {
-    margin-left: 2rem;
-    width: 60px;
-    padding: 8px 16px;
-    font-size: 2px;
-    margin-bottom: 1rem;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-  body .main .mastermindField #circle-options #delete i {
-    font-size: 8px;
-  }
-  body .main .rating {
-    width: 10%;
-    margin-top: 6rem;
-    margin-left: 2rem;
-  }
-  body .main .rating .rate {
-    height: 30px;
-    width: 30px;
-  }
-  body .main .rating .rate .rate-circle1,
-body .main .rating .rate .rate-circle2,
-body .main .rating .rate .rate-circle3,
-body .main .rating .rate .rate-circle4,
-body .main .rating .rate .rate-circle5,
-body .main .rating .rate .rate-circle6,
-body .main .rating .rate .rate-circle7 {
-    height: 8px;
-    width: 8px;
-  }
+
+.slot.drop-hover {
+  border-color: rgba(124, 92, 255, 0.8);
+  background: rgba(124, 92, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.25), 0 0 24px rgba(124, 92, 255, 0.35);
+  transform: scale(1.05);
 }
-@media screen and (max-width: 412px) {
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  body .main {
-    width: 100%;
-  }
-  body .main .mastermindField {
-    margin-left: 0.5rem;
-    width: 80%;
-  }
-  body .main .mastermindField .mastermind-area {
-    margin: 0;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result {
-    margin: 1rem;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result {
-    height: 25px;
-    width: 25px;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
-    margin-top: 0.4rem;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt2,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt3,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt4,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt5,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt6,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
-    height: 25px;
-    width: 25px;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(1) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(2) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(3) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(4) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(5) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(6) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options #delete {
-    margin-left: 0.5rem;
-    width: 60px;
-    padding: 8px 16px;
-    font-size: 10px;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-  body .main .mastermindField #circle-options #delete i {
-    font-size: 15px;
-  }
-  body .main .rating {
-    width: 10%;
-    margin-top: 12rem;
-    margin-left: 0.5rem;
-  }
-  body .main .rating .rate {
-    height: 39px;
-    width: 39px;
-    margin-bottom: 0.45rem;
-  }
-  body .main .rating .rate .rate-circle1,
-body .main .rating .rate .rate-circle2,
-body .main .rating .rate .rate-circle3,
-body .main .rating .rate .rate-circle4,
-body .main .rating .rate .rate-circle5,
-body .main .rating .rate .rate-circle6,
-body .main .rating .rate .rate-circle7 {
-    margin-left: 0.1rem;
-    height: 13px;
-    width: 13px;
-  }
+
+/* --- Rows ------------------------------------------------------------- */
+.row {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
-@media screen and (max-width: 360px) {
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  body .main {
-    width: 100%;
-  }
-  body .main .mastermindField {
-    margin-left: 0.1rem;
-    width: 69%;
-  }
-  body .main .mastermindField .mastermind-area {
-    margin: 0;
-    border-radius: 0px;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result {
-    margin: 0.2rem;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result {
-    height: 20px;
-    width: 20px;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-color-code-result .color-result img {
-    margin-top: 0.4rem;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-guesses {
-    margin: 0rem;
-  }
-  body .main .mastermindField .mastermind-area .mastermind-guesses .attempt1,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt2,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt3,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt4,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt5,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt6,
-body .main .mastermindField .mastermind-area .mastermind-guesses .attempt7 {
-    height: 20px;
-    width: 20px;
-  }
-  body .main .mastermindField #circle-options {
-    margin-left: 0rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(1) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(2) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(3) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(4) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(5) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options .circles:nth-child(6) {
-    height: 25px;
-    width: 25px;
-    margin-right: 0.5rem;
-  }
-  body .main .mastermindField #circle-options #delete {
-    margin-left: 0.5rem;
-    width: 20px;
-    padding: 8px 16px;
-    font-size: 10px;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-  body .main .mastermindField #circle-options #delete i {
-    font-size: 10px;
-  }
-  body .main .rating {
-    width: 10%;
-    margin-top: 8.6rem;
-    margin-left: 0.5rem;
-  }
-  body .main .rating .rate {
-    height: 33px;
-    width: 33px;
-    margin-bottom: 0.56rem;
-  }
-  body .main .rating .rate .rate-circle1,
-body .main .rating .rate .rate-circle2,
-body .main .rating .rate .rate-circle3,
-body .main .rating .rate .rate-circle4,
-body .main .rating .rate .rate-circle5,
-body .main .rating .rate .rate-circle6,
-body .main .rating .rate .rate-circle7 {
-    margin-left: 0.1rem;
-    height: 10px;
-    width: 10px;
-  }
+
+.row.active {
+  background: linear-gradient(90deg, rgba(124, 92, 255, 0.1), rgba(236, 72, 153, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(124, 92, 255, 0.25);
 }
-@-webkit-keyframes animatetop {
-  from {
-    top: -300px;
+
+.row.inactive .slot {
+  opacity: 0.85;
+}
+
+.row-index {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: rgb(148 163 184);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.row.active .row-index {
+  color: #fff;
+}
+
+.row.solved .row-index {
+  color: rgb(52 211 153);
+}
+
+.slots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 0.75rem);
+  gap: 3px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.25);
+  min-width: 2.4rem;
+  justify-items: center;
+}
+
+.fb-peg {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.fb-peg.correct {
+  background: radial-gradient(circle at 30% 25%, #a7f3d0, #10b981 60%);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.fb-peg.present {
+  background: radial-gradient(circle at 30% 25%, #fde68a, #f59e0b 60%);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.45);
+}
+
+/* --- Palette drop-back area ------------------------------------------ */
+#palette.drop-hover {
+  outline: 2px dashed rgba(124, 92, 255, 0.6);
+  outline-offset: 6px;
+  border-radius: 0.75rem;
+}
+
+/* --- Modal visibility helper ----------------------------------------- */
+.modal-open {
+  display: flex !important;
+}
+
+/* --- Animations ------------------------------------------------------- */
+@keyframes pop-in {
+  0% {
+    transform: scale(0.6);
     opacity: 0;
   }
-  to {
-    top: 0;
+  60% {
+    transform: scale(1.08);
     opacity: 1;
+  }
+  100% {
+    transform: scale(1);
   }
 }
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
+
+.peg.pop {
+  animation: pop-in 0.25s ease-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.row.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes glow-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fb-peg.correct,
+.fb-peg.present {
+  animation: glow-in 0.35s ease-out;
+}
+
+/* --- Secret code placeholder ----------------------------------------- */
+.secret-slot {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+}
+
+.secret-slot.revealed {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: transparent;
+}
+
+/* --- Responsive tweaks ------------------------------------------------ */
+@media (max-width: 640px) {
+  .peg {
+    width: 40px;
+    height: 40px;
   }
-  to {
-    top: 0;
-    opacity: 1;
+  .slot {
+    width: 46px;
+    height: 46px;
   }
-}/*# sourceMappingURL=style.css.map */
+  .secret-slot {
+    width: 36px;
+    height: 36px;
+  }
+  .row {
+    grid-template-columns: 2.5rem 1fr auto;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem;
+  }
+}

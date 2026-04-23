@@ -1,225 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <title>Mastermind</title>
     <link rel="shortcut icon" href="assets/favicon.ico">
     <meta name="author" content="Olivier Luethy">
 
-    <!-- To import the font-family from google fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        surface: {
+                            900: '#0b1020',
+                            800: '#121933',
+                            700: '#1a2347',
+                            600: '#242f5c'
+                        },
+                        accent: {
+                            DEFAULT: '#7c5cff',
+                            soft: '#a78bfa'
+                        }
+                    },
+                    boxShadow: {
+                        peg: 'inset -2px -3px 6px rgba(0,0,0,0.45), inset 2px 3px 6px rgba(255,255,255,0.25), 0 6px 14px rgba(0,0,0,0.35)',
+                        glow: '0 0 0 3px rgba(124,92,255,0.35), 0 0 24px rgba(124,92,255,0.35)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <div class="main">
-        <!-- Mastermind Field -->
-        <div class="mastermindField">
-            <h1>Mastermind <i title="See detailed informations about this game" class="fa fa-info-circle" id="information"></i></h1>
-            <div class="mastermind-area">
-                <div class="mastermind-color-code-result">
-                    <div class="color-result"><img id="questionmark1" src="assets/qeuestion_mark.png" alt=""></div>
-                    <div class="color-result"><img id="questionmark2" src="assets/qeuestion_mark.png" alt=""></div>
-                    <div class="color-result"><img id="questionmark3" src="assets/qeuestion_mark.png" alt=""></div>
-                    <div class="color-result"><img id="questionmark4" src="assets/qeuestion_mark.png" alt=""></div>
+<body class="min-h-screen bg-gradient-to-br from-surface-900 via-[#0d1230] to-[#1a0d2e] text-slate-100 font-sans antialiased">
+
+    <div class="max-w-5xl mx-auto px-4 py-6 md:py-10">
+
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-6 md:mb-10">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-pink-500 grid place-items-center shadow-lg shadow-accent/30">
+                    <i class="fa-solid fa-puzzle-piece text-white"></i>
                 </div>
-                <hr class="solid">
-                <div class="mastermind-guesses">
-                    <br>
-                    <!-- Attempt nine -->
-                    <div class="attempt10"></div>
-                    <div class="attempt10"></div>
-                    <div class="attempt10"></div>
-                    <div class="attempt10"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt nine -->
-                    <div class="attempt9"></div>
-                    <div class="attempt9"></div>
-                    <div class="attempt9"></div>
-                    <div class="attempt9"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt eight -->
-                    <div class="attempt8"></div>
-                    <div class="attempt8"></div>
-                    <div class="attempt8"></div>
-                    <div class="attempt8"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt seven -->
-                    <div class="attempt7"></div>
-                    <div class="attempt7"></div>
-                    <div class="attempt7"></div>
-                    <div class="attempt7"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt six -->
-                    <div class="attempt6"></div>
-                    <div class="attempt6"></div>
-                    <div class="attempt6"></div>
-                    <div class="attempt6"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt five -->
-                    <div class="attempt5"></div>
-                    <div class="attempt5"></div>
-                    <div class="attempt5"></div>
-                    <div class="attempt5"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt four -->
-                    <div class="attempt4"></div>
-                    <div class="attempt4"></div>
-                    <div class="attempt4"></div>
-                    <div class="attempt4"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt three -->
-                    <div class="attempt3"></div>
-                    <div class="attempt3"></div>
-                    <div class="attempt3"></div>
-                    <div class="attempt3"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt two -->
-                    <div class="attempt2"></div>
-                    <div class="attempt2"></div>
-                    <div class="attempt2"></div>
-                    <div class="attempt2"></div>
-                    <br>
-                    <br>
-                    <!-- Attempt one -->
-                    <div class="attempt1"></div>
-                    <div class="attempt1"></div>
-                    <div class="attempt1"></div>
-                    <div class="attempt1"></div>
-                    <br>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Mastermind</h1>
+                    <p class="text-xs md:text-sm text-slate-400 -mt-0.5">Crack the secret color code</p>
                 </div>
             </div>
-            <!-- Color options for the user -->
-            <div id="circle-options">
-                <button title="pink" class="circles" style="background-color: pink"></button>
-                <button title="red" class="circles" style="background-color: red;"></button>
-                <button title="violet" class="circles" style="background-color: violet;"></button>
-                <button title="blue" class="circles" style="background-color: blue;"></button>
-                <button title="yellow" class="circles" style="background-color: yellow;"></button>
-                <button title="black" class="circles" style="background-color: black;"></button>
-                <div id="delete"><i class="fa fa-angle-left"></i> Delete</div>
+            <div class="flex items-center gap-2">
+                <button id="resetBtn" title="Restart game"
+                    class="inline-flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg bg-surface-800/80 hover:bg-surface-700 border border-white/5 hover:border-white/10 text-sm font-medium transition">
+                    <i class="fa-solid fa-rotate-right text-slate-300"></i>
+                    <span class="hidden sm:inline">Restart</span>
+                </button>
+                <button id="infoBtn" title="How to play"
+                    class="inline-flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg bg-surface-800/80 hover:bg-surface-700 border border-white/5 hover:border-white/10 text-sm font-medium transition">
+                    <i class="fa-solid fa-circle-info text-slate-300"></i>
+                    <span class="hidden sm:inline">How to play</span>
+                </button>
             </div>
-        </div>
-        <!-- For displaying how many colors were correct or not -->
-        <div class="rating">
-            <div class="rate">
-                <div class="rate-circle10"></div>
-                <div class="rate-circle10"></div>
-                <div class="rate-circle10"></div>
-                <div class="rate-circle10"></div>
+        </header>
+
+        <!-- Game board -->
+        <div class="grid md:grid-cols-[1fr_auto] gap-6">
+
+            <div class="rounded-3xl bg-surface-800/60 backdrop-blur border border-white/5 shadow-2xl shadow-black/40 p-5 md:p-7">
+
+                <!-- Secret code -->
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Secret Code</p>
+                        <p class="text-sm text-slate-300">Hidden until you win or lose</p>
+                    </div>
+                    <div id="secretCode" class="flex gap-2 md:gap-3"></div>
+                </div>
+
+                <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-4"></div>
+
+                <!-- Board rows -->
+                <div id="board" class="flex flex-col-reverse gap-2 md:gap-3"></div>
+
+                <!-- Submit controls -->
+                <div class="mt-6 flex items-center justify-between gap-3">
+                    <div class="text-xs md:text-sm text-slate-400">
+                        Attempt <span id="attemptIndicator" class="font-semibold text-slate-200">1</span> of 10
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="clearRowBtn"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-700 hover:bg-surface-600 border border-white/5 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-eraser"></i>
+                            Clear
+                        </button>
+                        <button id="submitBtn" disabled
+                            class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-accent to-pink-500 hover:brightness-110 text-white text-sm font-semibold shadow-lg shadow-accent/30 transition disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none">
+                            Submit
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="rate">
-                <div class="rate-circle9"></div>
-                <div class="rate-circle9"></div>
-                <div class="rate-circle9"></div>
-                <div class="rate-circle9"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle8"></div>
-                <div class="rate-circle8"></div>
-                <div class="rate-circle8"></div>
-                <div class="rate-circle8"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle7"></div>
-                <div class="rate-circle7"></div>
-                <div class="rate-circle7"></div>
-                <div class="rate-circle7"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle6"></div>
-                <div class="rate-circle6"></div>
-                <div class="rate-circle6"></div>
-                <div class="rate-circle6"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle5"></div>
-                <div class="rate-circle5"></div>
-                <div class="rate-circle5"></div>
-                <div class="rate-circle5"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle4"></div>
-                <div class="rate-circle4"></div>
-                <div class="rate-circle4"></div>
-                <div class="rate-circle4"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle3"></div>
-                <div class="rate-circle3"></div>
-                <div class="rate-circle3"></div>
-                <div class="rate-circle3"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle2"></div>
-                <div class="rate-circle2"></div>
-                <div class="rate-circle2"></div>
-                <div class="rate-circle2"></div>
-            </div>
-            <div class="rate">
-                <div class="rate-circle1"></div>
-                <div class="rate-circle1"></div>
-                <div class="rate-circle1"></div>
-                <div class="rate-circle1"></div>
-            </div>
+
+            <!-- Palette panel -->
+            <aside class="rounded-3xl bg-surface-800/60 backdrop-blur border border-white/5 shadow-2xl shadow-black/40 p-5 md:p-7 md:w-56">
+                <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-1">Palette</p>
+                <p class="text-sm text-slate-300 mb-4">Drag colors into a slot</p>
+                <div id="palette" class="grid grid-cols-3 md:grid-cols-2 gap-3 justify-items-center"></div>
+                <p class="text-xs text-slate-500 mt-5 leading-relaxed">
+                    <i class="fa-solid fa-lightbulb text-amber-300/80 mr-1"></i>
+                    Drag between slots to swap. Drag back to the palette to remove.
+                </p>
+            </aside>
         </div>
 
-        <!-- Model that appears when you have lost -->
-        <div id="youHaveLost" class="have_lost">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span id="have_lost_close">&times;</span>
-                    <h1>You have lost!</h1>
-                    <button onclick="replay()" class="replay">Replay</button>
-                </div>
-            </div>
+        <footer class="mt-8 text-center text-xs text-slate-500">
+            Find the 4-color code in 10 tries — each color appears at most once.
+        </footer>
+    </div>
+
+    <!-- Win / Lose modal -->
+    <div id="endModal" class="hidden fixed inset-0 z-40 items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="relative w-full max-w-md rounded-2xl bg-surface-800 border border-white/10 shadow-2xl p-7 text-center">
+            <button id="endClose" class="absolute top-3 right-3 w-9 h-9 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="endIcon" class="mx-auto w-16 h-16 rounded-full grid place-items-center mb-3 text-3xl"></div>
+            <h2 id="endTitle" class="text-2xl font-extrabold tracking-tight mb-1"></h2>
+            <p id="endSubtitle" class="text-slate-400 mb-5"></p>
+            <div id="endReveal" class="flex justify-center gap-2 mb-6"></div>
+            <button onclick="replay()"
+                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-accent to-pink-500 hover:brightness-110 text-white font-semibold shadow-lg shadow-accent/30 transition">
+                <i class="fa-solid fa-rotate-right"></i>
+                Play again
+            </button>
         </div>
-        <!-- Model that appears when you have won -->
-        <div id="youHaveWon" class="have_won">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span id="have_won_close">&times;</span>
-                    <h1>You have won!</h1>
-                    <button onclick="replay()" class="replay">Replay</button>
+    </div>
+
+    <!-- Info modal -->
+    <div id="infoModal" class="hidden fixed inset-0 z-40 items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="relative w-full max-w-lg rounded-2xl bg-surface-800 border border-white/10 shadow-2xl p-7">
+            <button id="infoClose" class="absolute top-3 right-3 w-9 h-9 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="text-2xl font-extrabold tracking-tight mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-accent"></i>
+                How to play
+            </h2>
+            <div class="space-y-4 text-sm text-slate-300">
+                <div>
+                    <h3 class="font-semibold text-slate-100 mb-1">Goal</h3>
+                    <p>Uncover the hidden 4-color code within 10 attempts.</p>
                 </div>
-            </div>
-        </div>
-        <!-- Model that shows informations for the user after he clicks on the info button -->
-        <div id="informationModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Informations</h2>
-                    <h3>What is the goal of this game?</h3>
-                    <li>You have to find out the right color code.</li>
-                    <br>
-                    <h3>For what are the circles on the right?</h3>
-                    <li>In this circles will be shown how many selected colors are in the code and in the right position, how many colors are in the code but not in the right position and how many colors aren't in the code.</li>
-                    <li>But the colors will be only displayed, when you have selected 4 colors for an attempt!</li>
-                    <br>
-                    <h3>What do the colors in the right circles exactly define?</h3>
-                    <li>Black circles: A color is in the code and in the right position.</li>
-                    <li>Gray circles: A color is in the code but not in the right position.</li>
-                    <li>White circles: A color is not in the code</li>
-                    <br>
+                <div>
+                    <h3 class="font-semibold text-slate-100 mb-1">How to guess</h3>
+                    <p>Drag colors from the palette into the four slots of the active row. You can swap between slots or drag a color back to the palette. When all four slots are filled, press <span class="font-semibold text-accent-soft">Submit</span>.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-slate-100 mb-1">Feedback pegs</h3>
+                    <ul class="space-y-1.5 pl-1">
+                        <li class="flex items-center gap-2">
+                            <span class="inline-block w-3 h-3 rounded-full bg-emerald-400 shadow-peg"></span>
+                            Right color, right position
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="inline-block w-3 h-3 rounded-full bg-amber-300 shadow-peg"></span>
+                            Right color, wrong position
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="inline-block w-3 h-3 rounded-full bg-slate-600 shadow-peg"></span>
+                            Color isn&apos;t in the code
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="js/main.js"></script>
 </body>
 

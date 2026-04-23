@@ -1,208 +1,493 @@
-/* Array to store the color code */
-var colorcode = [];
-/* To check how many colors the user has already selected for the attempt */
-var buttonClick = 0;
-/* Tracks if player has won */
-var win = false;
-/* Counts the attempts */
-var attempts = 1;
-/* Variable for right positions */
-var rightPosition = 0;
-/* Variable for colors in code but not in right position */
-var notRightPosition = 0;
-/* Array to store user's current attempt */
-var userAttempt = [];
-/* Modal when you have won */
-var winmodal = document.getElementById("youHaveWon");
-/* Modal when you have lost */
-var lostmodal = document.getElementById("youHaveLost");
-/* All available colors */
-var colors = ["pink", "red", "violet", "blue", "yellow", "black"];
-/* Placeholder for random color selection */
-var placeholder;
-/* To store the amount of right positions */
-var rightPositionCounter = 0;
-/* To store the amount of colors that aren't in the right position */
-var notRightPositionCounter = 0;
+/* =====================================================================
+ * Mastermind — modern drag-and-drop edition
+ * --------------------------------------------------------------------- */
 
-/* Generate random color code with 4 unique colors */
-for (let i = 0; i < 4; i++) {
-  placeholder = colors[Math.floor(Math.random() * colors.length)];
-  while (colorcode.includes(placeholder)) {
-    placeholder = colors[Math.floor(Math.random() * colors.length)];
+const COLORS = [
+  { id: "pink",   label: "Pink",   hex: "#ec4899" },
+  { id: "red",    label: "Red",    hex: "#ef4444" },
+  { id: "violet", label: "Violet", hex: "#a855f7" },
+  { id: "blue",   label: "Blue",   hex: "#3b82f6" },
+  { id: "yellow", label: "Yellow", hex: "#eab308" },
+  { id: "black",  label: "Black",  hex: "#18181b" },
+];
+
+const MAX_ATTEMPTS = 10;
+const SLOTS_PER_ROW = 4;
+
+const state = {
+  secret: [],
+  attempt: 1,
+  gameOver: false,
+  won: false,
+  guess: Array(SLOTS_PER_ROW).fill(null),
+  history: [], // { guess: [ids], feedback: { correct, present } }
+};
+
+const colorById = (id) => COLORS.find((c) => c.id === id);
+
+/* ---------------------------------------------------------------------
+ * Secret code generation — 4 unique colors
+ * ------------------------------------------------------------------- */
+function generateSecret() {
+  const pool = COLORS.map((c) => c.id);
+  const code = [];
+  while (code.length < SLOTS_PER_ROW) {
+    const i = Math.floor(Math.random() * pool.length);
+    code.push(pool.splice(i, 1)[0]);
   }
-  colorcode.push(placeholder);
+  return code;
 }
-console.log("Color Code " + colorcode);
 
-/* Handle color selection */
-document.getElementById("circle-options").addEventListener("click", (e) => {
-  if (win == false && attempts < 11) {
-    var element = e.target;
-    if (element.tagName == "BUTTON") {
-      var color = element.style.backgroundColor;
-      element.style.visibility = "hidden";
+/* ---------------------------------------------------------------------
+ * DOM builders
+ * ------------------------------------------------------------------- */
+function makePeg(colorId, { draggable = false, className = "" } = {}) {
+  const peg = document.createElement("div");
+  peg.className = `peg ${className}`.trim();
+  peg.style.setProperty("--peg-color", colorById(colorId).hex);
+  peg.dataset.color = colorId;
+  if (draggable) {
+    peg.classList.add("draggable");
+    peg.setAttribute("draggable", "true");
+    peg.setAttribute("role", "button");
+    peg.setAttribute("aria-label", `${colorById(colorId).label} peg`);
+  }
+  return peg;
+}
 
-      rightOrNotRight(color);
-      putSelectedColorInCircle(color);
+function buildPalette() {
+  const palette = document.getElementById("palette");
+  palette.innerHTML = "";
+  COLORS.forEach((c) => {
+    const wrap = document.createElement("div");
+    wrap.className = "palette-slot";
+    wrap.dataset.paletteColor = c.id;
 
-      buttonClick++;
-      if (buttonClick == 4) {
-        validateAttempt();
-        if (rightPosition == 4) {
-          rateing(attempts, rightPosition, notRightPosition);
-          winmodal.style.display = "block";
-          win = true;
-          attempts++;
-        } else {
-          rateing(attempts, rightPosition, notRightPosition);
-          if (attempts == 10) {
-            showResult();
-            lostmodal.style.display = "block";
-            attempts++;
-          } else {
-            rightPosition = 0;
-            notRightPosition = 0;
-            attempts++;
-            buttonClick = 0;
-            userAttempt = [];
-            const circle_option_buttons = document.querySelectorAll(".circles");
-            for (let btn of circle_option_buttons) {
-              btn.style.visibility = "visible";
-            }
-          }
-        }
+    const peg = makePeg(c.id, { draggable: true });
+    peg.dataset.source = "palette";
+    attachPegDrag(peg);
+    wrap.appendChild(peg);
+    palette.appendChild(wrap);
+  });
+
+  // Palette itself is a drop target for removing from slots
+  palette.addEventListener("dragover", onPaletteDragOver);
+  palette.addEventListener("dragleave", onPaletteDragLeave);
+  palette.addEventListener("drop", onPaletteDrop);
+}
+
+function buildSecretCode() {
+  const holder = document.getElementById("secretCode");
+  holder.innerHTML = "";
+  for (let i = 0; i < SLOTS_PER_ROW; i++) {
+    const s = document.createElement("div");
+    s.className = "secret-slot";
+    s.innerHTML = '<i class="fa-solid fa-question text-xs"></i>';
+    holder.appendChild(s);
+  }
+}
+
+function buildBoard() {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
+  for (let i = 1; i <= MAX_ATTEMPTS; i++) {
+    const row = document.createElement("div");
+    row.className = "row inactive";
+    row.dataset.attempt = i;
+
+    const idx = document.createElement("div");
+    idx.className = "row-index";
+    idx.textContent = String(i).padStart(2, "0");
+
+    const slots = document.createElement("div");
+    slots.className = "slots";
+    for (let s = 0; s < SLOTS_PER_ROW; s++) {
+      const slot = document.createElement("div");
+      slot.className = "slot";
+      slot.dataset.attempt = i;
+      slot.dataset.index = s;
+      attachSlotDnd(slot);
+      slots.appendChild(slot);
+    }
+
+    const fb = document.createElement("div");
+    fb.className = "feedback-grid";
+    for (let f = 0; f < SLOTS_PER_ROW; f++) {
+      const p = document.createElement("div");
+      p.className = "fb-peg";
+      fb.appendChild(p);
+    }
+
+    row.appendChild(idx);
+    row.appendChild(slots);
+    row.appendChild(fb);
+    board.appendChild(row);
+  }
+  activateCurrentRow();
+}
+
+/* ---------------------------------------------------------------------
+ * Current-row activation
+ * ------------------------------------------------------------------- */
+function activateCurrentRow() {
+  document.querySelectorAll("#board .row").forEach((row) => {
+    const n = Number(row.dataset.attempt);
+    row.classList.toggle("active", n === state.attempt);
+    row.classList.toggle("inactive", n !== state.attempt);
+  });
+  document.getElementById("attemptIndicator").textContent = String(state.attempt);
+}
+
+/* ---------------------------------------------------------------------
+ * Drag and drop
+ * ------------------------------------------------------------------- */
+let dragCtx = null; // { color, source: 'palette'|'slot', fromAttempt, fromIndex, el }
+
+function attachPegDrag(peg) {
+  peg.addEventListener("dragstart", (e) => {
+    if (state.gameOver) {
+      e.preventDefault();
+      return;
+    }
+    const source = peg.dataset.source;
+    if (source === "slot") {
+      const slot = peg.closest(".slot");
+      if (Number(slot.dataset.attempt) !== state.attempt) {
+        e.preventDefault();
+        return;
+      }
+      dragCtx = {
+        color: peg.dataset.color,
+        source: "slot",
+        fromAttempt: Number(slot.dataset.attempt),
+        fromIndex: Number(slot.dataset.index),
+        el: peg,
+      };
+    } else {
+      dragCtx = {
+        color: peg.dataset.color,
+        source: "palette",
+        el: peg,
+      };
+    }
+    peg.classList.add("dragging");
+    // Required to enable drag in Firefox
+    e.dataTransfer.effectAllowed = "move";
+    try {
+      e.dataTransfer.setData("text/plain", peg.dataset.color);
+    } catch (_) { /* no-op */ }
+  });
+
+  peg.addEventListener("dragend", () => {
+    peg.classList.remove("dragging");
+    clearAllDropHover();
+    dragCtx = null;
+  });
+}
+
+function attachSlotDnd(slot) {
+  slot.addEventListener("dragover", (e) => {
+    if (!dragCtx) return;
+    if (Number(slot.dataset.attempt) !== state.attempt) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    slot.classList.add("drop-hover");
+  });
+  slot.addEventListener("dragleave", () => {
+    slot.classList.remove("drop-hover");
+  });
+  slot.addEventListener("drop", (e) => {
+    e.preventDefault();
+    slot.classList.remove("drop-hover");
+    if (!dragCtx || state.gameOver) return;
+    if (Number(slot.dataset.attempt) !== state.attempt) return;
+    handleDropOnSlot(Number(slot.dataset.index));
+  });
+}
+
+function onPaletteDragOver(e) {
+  if (!dragCtx || dragCtx.source !== "slot") return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "move";
+  document.getElementById("palette").classList.add("drop-hover");
+}
+
+function onPaletteDragLeave() {
+  document.getElementById("palette").classList.remove("drop-hover");
+}
+
+function onPaletteDrop(e) {
+  e.preventDefault();
+  document.getElementById("palette").classList.remove("drop-hover");
+  if (!dragCtx || dragCtx.source !== "slot" || state.gameOver) return;
+  // Remove from the originating slot
+  state.guess[dragCtx.fromIndex] = null;
+  renderCurrentGuess();
+  refreshPalette();
+  updateSubmitState();
+}
+
+function clearAllDropHover() {
+  document.querySelectorAll(".drop-hover").forEach((el) => el.classList.remove("drop-hover"));
+}
+
+/* ---------------------------------------------------------------------
+ * Drop logic
+ *   - palette → empty slot: place
+ *   - palette → filled slot: replace (old returns to palette)
+ *   - slot → empty slot: move
+ *   - slot → filled slot: swap
+ * ------------------------------------------------------------------- */
+function handleDropOnSlot(targetIndex) {
+  const { color, source, fromIndex } = dragCtx;
+
+  if (source === "palette") {
+    // Replacing whatever is in the target slot (if any)
+    state.guess[targetIndex] = color;
+  } else {
+    // slot → slot: move or swap
+    if (targetIndex === fromIndex) return;
+    const moving = state.guess[fromIndex];
+    const existing = state.guess[targetIndex];
+    state.guess[targetIndex] = moving;
+    state.guess[fromIndex] = existing; // null if target was empty → becomes empty
+  }
+  renderCurrentGuess();
+  refreshPalette();
+  updateSubmitState();
+}
+
+/* ---------------------------------------------------------------------
+ * Render helpers
+ * ------------------------------------------------------------------- */
+function renderCurrentGuess() {
+  const slots = document.querySelectorAll(`#board .row[data-attempt="${state.attempt}"] .slot`);
+  slots.forEach((slot, i) => {
+    slot.innerHTML = "";
+    const colorId = state.guess[i];
+    if (colorId) {
+      const peg = makePeg(colorId, { draggable: true, className: "pop" });
+      peg.dataset.source = "slot";
+      attachPegDrag(peg);
+      slot.appendChild(peg);
+      slot.classList.add("filled");
+    } else {
+      slot.classList.remove("filled");
+    }
+  });
+}
+
+function refreshPalette() {
+  const placed = new Set(state.guess.filter(Boolean));
+  document.querySelectorAll("#palette .palette-slot").forEach((wrap) => {
+    const peg = wrap.querySelector(".peg");
+    if (placed.has(wrap.dataset.paletteColor)) {
+      peg.classList.add("hidden");
+    } else {
+      peg.classList.remove("hidden");
+    }
+  });
+}
+
+function updateSubmitState() {
+  const full = state.guess.every((c) => c !== null);
+  const submit = document.getElementById("submitBtn");
+  const clear = document.getElementById("clearRowBtn");
+  submit.disabled = !full || state.gameOver;
+  clear.disabled = state.guess.every((c) => c === null) || state.gameOver;
+}
+
+/* ---------------------------------------------------------------------
+ * Scoring — preserved from original logic
+ * ------------------------------------------------------------------- */
+function score(guess, secret) {
+  const g = [...guess];
+  const s = [...secret];
+  let correct = 0;
+  let present = 0;
+
+  for (let i = 0; i < SLOTS_PER_ROW; i++) {
+    if (g[i] === s[i]) {
+      correct++;
+      g[i] = null;
+      s[i] = null;
+    }
+  }
+  for (let i = 0; i < SLOTS_PER_ROW; i++) {
+    if (g[i] !== null) {
+      const idx = s.indexOf(g[i]);
+      if (idx !== -1) {
+        present++;
+        s[idx] = null;
       }
     }
   }
-});
-
-/* Store the selected color in userAttempt */
-function rightOrNotRight(color) {
-  userAttempt.push(color);
+  return { correct, present };
 }
 
-/* Validate the user's attempt */
-function validateAttempt() {
-  let tempColorCode = [...colorcode];
-  let tempAttempt = [...userAttempt];
-  rightPosition = 0;
-  notRightPosition = 0;
+function renderFeedback(attempt, { correct, present }) {
+  const row = document.querySelector(`#board .row[data-attempt="${attempt}"]`);
+  const pegs = row.querySelectorAll(".fb-peg");
+  let i = 0;
+  for (let c = 0; c < correct; c++, i++) pegs[i].classList.add("correct");
+  for (let p = 0; p < present; p++, i++) pegs[i].classList.add("present");
+}
 
-  // First pass: Check for correct position (black pegs)
-  for (let i = 0; i < 4; i++) {
-    if (tempAttempt[i] === tempColorCode[i]) {
-      rightPosition++;
-      tempColorCode[i] = null;
-      tempAttempt[i] = null;
-    }
+/* ---------------------------------------------------------------------
+ * Submit, reset, end-of-game
+ * ------------------------------------------------------------------- */
+function freezeRow(attempt) {
+  document
+    .querySelectorAll(`#board .row[data-attempt="${attempt}"] .peg`)
+    .forEach((peg) => {
+      peg.classList.remove("draggable");
+      peg.removeAttribute("draggable");
+      peg.dataset.source = "frozen";
+    });
+}
+
+function submitGuess() {
+  if (state.gameOver) return;
+  if (!state.guess.every(Boolean)) return;
+
+  const result = score(state.guess, state.secret);
+  renderFeedback(state.attempt, result);
+  freezeRow(state.attempt);
+  state.history.push({ guess: [...state.guess], feedback: result });
+
+  if (result.correct === SLOTS_PER_ROW) {
+    document.querySelector(`#board .row[data-attempt="${state.attempt}"]`).classList.add("solved");
+    state.won = true;
+    state.gameOver = true;
+    revealSecret();
+    showEndModal(true);
+    return;
   }
 
-  // Second pass: Check for correct color, wrong position (gray pegs)
-  for (let i = 0; i < 4; i++) {
-    if (tempAttempt[i] !== null) {
-      const index = tempColorCode.indexOf(tempAttempt[i]);
-      if (index !== -1) {
-        notRightPosition++;
-        tempColorCode[index] = null;
-      }
-    }
+  if (state.attempt >= MAX_ATTEMPTS) {
+    state.gameOver = true;
+    revealSecret();
+    showEndModal(false);
+    return;
   }
-  console.log(
-    "Right Position: " + rightPosition,
-    "Wrong Position: " + notRightPosition
-  );
+
+  // Advance to the next row
+  state.attempt++;
+  state.guess = Array(SLOTS_PER_ROW).fill(null);
+  refreshPalette();
+  activateCurrentRow();
+  updateSubmitState();
 }
 
-/* Set the color into the correct circle */
-function putSelectedColorInCircle(color) {
-  let elements = document.getElementsByClassName("attempt" + attempts);
-  elements[buttonClick].style.backgroundColor = color;
+function clearRow() {
+  if (state.gameOver) return;
+  state.guess = Array(SLOTS_PER_ROW).fill(null);
+  renderCurrentGuess();
+  refreshPalette();
+  updateSubmitState();
 }
 
-/* Replay the game */
+function revealSecret() {
+  const slots = document.querySelectorAll("#secretCode .secret-slot");
+  slots.forEach((s, i) => {
+    s.innerHTML = "";
+    s.classList.add("revealed");
+    const peg = makePeg(state.secret[i], { className: "pop sm" });
+    s.appendChild(peg);
+  });
+}
+
+/* ---------------------------------------------------------------------
+ * Modals
+ * ------------------------------------------------------------------- */
+function showEndModal(won) {
+  const modal = document.getElementById("endModal");
+  const icon = document.getElementById("endIcon");
+  const title = document.getElementById("endTitle");
+  const sub = document.getElementById("endSubtitle");
+  const reveal = document.getElementById("endReveal");
+
+  if (won) {
+    icon.className = "mx-auto w-16 h-16 rounded-full grid place-items-center mb-3 text-3xl bg-emerald-500/20 text-emerald-300";
+    icon.innerHTML = '<i class="fa-solid fa-trophy"></i>';
+    title.textContent = "You cracked the code!";
+    sub.textContent = `Solved in ${state.attempt} ${state.attempt === 1 ? "try" : "tries"}.`;
+  } else {
+    icon.className = "mx-auto w-16 h-16 rounded-full grid place-items-center mb-3 text-3xl bg-rose-500/20 text-rose-300";
+    icon.innerHTML = '<i class="fa-solid fa-face-frown"></i>';
+    title.textContent = "Out of guesses";
+    sub.textContent = "Here was the secret code:";
+  }
+
+  reveal.innerHTML = "";
+  state.secret.forEach((id) => {
+    const peg = makePeg(id, { className: "sm pop" });
+    reveal.appendChild(peg);
+  });
+
+  modal.classList.add("modal-open");
+}
+
+function hideEndModal() {
+  document.getElementById("endModal").classList.remove("modal-open");
+}
+
+function showInfoModal() {
+  document.getElementById("infoModal").classList.add("modal-open");
+}
+
+function hideInfoModal() {
+  document.getElementById("infoModal").classList.remove("modal-open");
+}
+
+/* ---------------------------------------------------------------------
+ * Global handlers
+ * ------------------------------------------------------------------- */
 function replay() {
-  window.location = window.location;
+  hideEndModal();
+  initGame();
 }
 
-/* Display rating by filling the small circles */
-function rateing(attempts, rightPosition, notRightPosition) {
-  let elements = document.getElementsByClassName("rate-circle" + attempts);
-  for (let i = 0; i < elements.length; i++) {
-    if (rightPosition > rightPositionCounter) {
-      elements[i].style.backgroundColor = "black";
-      rightPositionCounter++;
-    } else if (notRightPosition > notRightPositionCounter) {
-      elements[i].style.backgroundColor = "gray";
-      notRightPositionCounter++;
+function initGame() {
+  state.secret = generateSecret();
+  state.attempt = 1;
+  state.gameOver = false;
+  state.won = false;
+  state.guess = Array(SLOTS_PER_ROW).fill(null);
+  state.history = [];
+
+  buildSecretCode();
+  buildBoard();
+  buildPalette();
+  updateSubmitState();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initGame();
+
+  document.getElementById("submitBtn").addEventListener("click", submitGuess);
+  document.getElementById("clearRowBtn").addEventListener("click", clearRow);
+  document.getElementById("resetBtn").addEventListener("click", replay);
+  document.getElementById("infoBtn").addEventListener("click", showInfoModal);
+  document.getElementById("infoClose").addEventListener("click", hideInfoModal);
+  document.getElementById("endClose").addEventListener("click", hideEndModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      hideInfoModal();
+      hideEndModal();
     }
-  }
-  rightPositionCounter = 0;
-  notRightPositionCounter = 0;
-}
-
-/* Show the result */
-function showResult() {
-  for (var i = 1; i < 5; i++) {
-    document.getElementById("questionmark" + i).style.display = "none";
-  }
-  let elements = document.getElementsByClassName("color-result");
-  for (let i = 0; i < elements.length; i++) {
-    elements[i].style.backgroundColor = colorcode[i];
-  }
-}
-
-/* Delete a color from the field */
-document.getElementById("delete").addEventListener("click", function () {
-  if (attempts != 10 && win == false && buttonClick > 0) {
-    buttonClick--;
-    let elements = document.getElementsByClassName("attempt" + attempts);
-    elements[buttonClick].style.backgroundColor = "white";
-
-    let deletedColor = userAttempt.pop();
-
-    const colorButtons = document.querySelectorAll(".circles");
-    for (let btn of colorButtons) {
-      if (btn.style.backgroundColor === deletedColor) {
-        btn.style.visibility = "visible";
-        break;
-      }
+    if (e.key === "Enter" && !document.getElementById("submitBtn").disabled) {
+      submitGuess();
     }
-  }
+  });
+
+  // Click outside to close modals
+  [document.getElementById("endModal"), document.getElementById("infoModal")].forEach((m) => {
+    m.addEventListener("click", (e) => {
+      if (e.target === m) m.classList.remove("modal-open");
+    });
+  });
 });
 
-/* Modal close handlers */
-var winspan = document.getElementById("have_won_close");
-winspan.onclick = function () {
-  winmodal.style.display = "none";
-};
-
-var lostspan = document.getElementById("have_lost_close");
-lostspan.onclick = function () {
-  lostmodal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target == winmodal || event.target == lostmodal) {
-    event.target.style.display = "none";
-  }
-};
-
-/* Information Modal */
-var modal = document.getElementById("informationModal");
-var btn = document.getElementById("information");
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function () {
-  modal.style.display = "block";
-};
-
-span.onclick = function () {
-  modal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+window.replay = replay;
